@@ -1,0 +1,19 @@
+{
+  "slate": { "hue": 215, "chroma": 0.02 },
+  "gray": { "hue": 220, "chroma": 0.01 },
+  "zinc": { "hue": 240, "chroma": 0.015 },
+  "red": { "hue": 25, "chroma": 0.18 },
+  "orange": { "hue": 55, "chroma": 0.16 },
+  "amber": { "hue": 75, "chroma": 0.15 },
+  "yellow": { "hue": 90, "chroma": 0.14 },
+  "green": { "hue": 145, "chroma": 0.14 },
+  "emerald": { "hue": 160, "chroma": 0.13 },
+  "teal": { "hue": 175, "chroma": 0.1 },
+  "cyan": { "hue": 195, "chroma": 0.12 },
+  "blue": { "hue": 230, "chroma": 0.15 },
+  "indigo": { "hue": 264, "chroma": 0.17 },
+  "violet": { "hue": 285, "chroma": 0.16 },
+  "purple": { "hue": 295, "chroma": 0.15 },
+  "pink": { "hue": 340, "chroma": 0.16 },
+  "rose": { "hue": 10, "chroma": 0.18 }
+}
