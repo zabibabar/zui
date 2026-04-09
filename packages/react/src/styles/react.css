@@ -1,0 +1,44 @@
+@import 'react-day-picker/style.css';
+@import '@zui/web/styles/example-theme.css';
+
+@theme inline {
+  /* Dialog / overlay */
+  --animate-dialog-overlay-in: zui-dialog-overlay-in 200ms var(--ease-out) forwards;
+  --animate-dialog-content-in: zui-dialog-content-in 200ms var(--ease-out) forwards;
+  --animate-drawer-in-right: zui-drawer-in-right 250ms var(--ease-out) forwards;
+  --animate-drawer-in-left: zui-drawer-in-left 250ms var(--ease-out) forwards;
+
+  @keyframes zui-dialog-overlay-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes zui-dialog-content-in {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  @keyframes zui-drawer-in-right {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+
+  @keyframes zui-drawer-in-left {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+  }
+}
+
+/* react-day-picker — map to theme tokens */
+.rdp-root {
+  --rdp-accent-color: var(--primary);
+  --rdp-accent-background-color: color-mix(in oklch, var(--primary) 18%, var(--background));
+  --rdp-range_start-color: var(--primary-foreground);
+  --rdp-range_end-color: var(--primary-foreground);
+}

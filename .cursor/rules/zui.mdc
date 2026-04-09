@@ -1,0 +1,38 @@
+---
+description: ZUI monorepo architecture, quality, and testing rules
+alwaysApply: true
+---
+
+# ZUI Monorepo Rules
+
+## Scope
+- Apply these rules to every code change in this repository.
+- Prefer minimal, targeted changes and avoid unrelated refactors.
+- Preserve existing project structure, conventions, and tooling.
+
+## Package Boundaries
+- Respect workspace boundaries in `packages/*` and `apps/*`.
+- Keep dependency direction aligned with lint rules:
+  - `@zui/core` must not import from `@zui/web` or `@zui/react`.
+  - `@zui/web` must not import from `@zui/react`.
+  - `@zui/react` should consume core functionality through `@zui/web`, not directly from `@zui/core`.
+- Do not bypass package boundaries with relative imports into other packages.
+
+## TypeScript and API Quality
+- Follow strict TypeScript settings from the repo config.
+- Do not introduce `any`; prefer precise types, generics, and narrowing.
+- Keep public APIs stable unless a breaking change is explicitly requested.
+- Favor named exports and clear module boundaries.
+
+## Testing and Verification
+- Add or update tests for behavior changes and bug fixes.
+- Keep tests deterministic and avoid committed `.only` or `.skip`.
+- Before finalizing substantial changes, run relevant checks:
+  - `yarn typecheck`
+  - `yarn lint`
+  - `yarn test`
+
+## Safety and Change Hygiene
+- Do not revert or modify unrelated user changes.
+- Avoid destructive git operations unless explicitly requested.
+- If behavior changes, update nearby docs/comments that describe expected behavior.

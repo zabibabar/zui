@@ -1,20 +1,20 @@
 {
   "name": "zui",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
+    "build": "tsc --build",
+    "typecheck": "tsc --build",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "typecheck": "tsc --noEmit",
-    "generate:themes": "tsx scripts/generate-example-themes.ts",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -28,7 +28,8 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^8.0.0",
-    "@eslint-react/eslint-plugin": "^4.2.3",
+    "@eslint-react/eslint-plugin": "^3.0.0",
+    "@types/node": "^25.5.2",
     "eslint": "^10.2.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react-refresh": "^0.5.2",
@@ -37,14 +38,6 @@
     "prettier": "^3.8.1",
     "tsx": "^4.21.0",
     "typescript": "~5.9.3",
-    "vite": "^8.0.1",
     "vitest": "^4.1.2"
-  },
-  "dependencies": {
-    "@tailwindcss/vite": "^4.2.2",
-    "clsx": "^2.1.1",
-    "tailwind-merge": "^3.5.0",
-    "tailwind-variants": "^3.2.2",
-    "tailwindcss": "4"
   }
 }

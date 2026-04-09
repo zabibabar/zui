@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ZUI Theme Contract",
+  "description": "Defines what a consumer theme MUST provide to use the zui design system.",
+  "type": "object",
+  "required": ["name", "mode", "colors"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Human-readable theme name (e.g. 'Ocean Light', 'Forest Dark')"
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["light", "dark"],
+      "description": "Whether this is a light or dark theme. Controls which shade maps to which semantic token."
+    },
+    "colors": {
+      "type": "object",
+      "description": "Color seeds for each intent. Each seed is { hue, chroma, anchorLightness }. Only primary and neutral are required.",
+      "required": ["primary", "neutral"],
+      "properties": {
+        "primary": { "$ref": "#/$defs/colorSeed" },
+        "neutral": { "$ref": "#/$defs/colorSeed" },
+        "danger": { "$ref": "#/$defs/colorSeed" },
+        "info": { "$ref": "#/$defs/colorSeed" },
+        "success": { "$ref": "#/$defs/colorSeed" },
+        "warning": { "$ref": "#/$defs/colorSeed" }
+      },
+      "additionalProperties": { "$ref": "#/$defs/colorSeed" }
+    },
+    "surfaces": {
+      "type": "object",
+      "description": "Optional surface colors for canvas layering. Independent of the neutral palette. Each is an oklch() string. Omitted values cascade: raised derives from base, overlay matches raised.",
+      "properties": {
+        "base": {
+          "type": "string",
+          "description": "App background (e.g. 'oklch(0.985 0 0)'). Default: oklch(0.985 0 0) light / oklch(0.13 0 0) dark."
+        },
+        "raised": {
+          "type": "string",
+          "description": "Cards, sidebar, toolbar (e.g. 'oklch(1 0 0)'). Default: derived from base."
+        },
+        "overlay": {
+          "type": "string",
+          "description": "Dialogs, drawers, popovers (e.g. 'oklch(1 0 0)'). Default: same as raised."
+        }
+      },
+      "additionalProperties": false
+    },
+    "ink": {
+      "type": "object",
+      "description": "Optional ink colors for text on surfaces. Independent of the neutral palette. Default body text (--foreground, --card-foreground, --popover-foreground) aliases ink, not neutral. The system auto-selects dark or light ink for text on color intent shades.",
+      "properties": {
+        "dark": {
+          "type": "string",
+          "description": "Dark ink for text on light surfaces (e.g. 'oklch(0.145 0 0)'). Default: oklch(0.145 0 0)."
+        },
+        "light": {
+          "type": "string",
+          "description": "Light ink for text on dark surfaces (e.g. 'oklch(0.985 0 0)'). Default: oklch(0.985 0 0)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "chrome": {
+      "type": "object",
+      "description": "Optional UI chrome: borders, inputs, and focus ring. Independent of the neutral palette. Each value is an oklch() string. Omitted border/input use defaults derived from surfaces; omitted ring uses the primary palette 300 stop.",
+      "properties": {
+        "border": {
+          "type": "string",
+          "description": "Default hairlines and separators (--border). Default: derived from surface base/raised."
+        },
+        "input": {
+          "type": "string",
+          "description": "Input borders (--input). Default: same as border when omitted."
+        },
+        "ring": {
+          "type": "string",
+          "description": "Focus ring color (--ring). Default: primary palette 300 stop (lighter brand tint)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "lightnessCurve": {
+      "type": "object",
+      "description": "Optional override for the default lightness curve. Keys are shade names (50-950), values are OKLCH lightness (0-1).",
+      "patternProperties": {
+        "^(50|100|200|300|400|500|600|700|800|900|950)$": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "colorSeed": {
+      "type": "object",
+      "required": ["hue", "chroma", "anchorLightness"],
+      "properties": {
+        "hue": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 360,
+          "description": "OKLCH hue angle (0-360)"
+        },
+        "chroma": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.4,
+          "description": "OKLCH chroma (0 = gray, ~0.15 = vivid, ~0.3 = extremely saturated)"
+        },
+        "anchorLightness": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "OKLCH lightness (0-1) for the anchor shade; the default curve is shifted so this shade matches."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,174 @@
+@import 'tailwindcss';
+
+/*
+ * ZUI Design System — Tailwind Theme Bridge
+ *
+ * Defaults on :root (override on :root or any ancestor):
+ *   --density: 1  (try 0.85 compact / 1.15 relaxed)
+ *   --radius:    base corner radius (e.g. 0.625rem)
+ *
+ * Theme layer must supply semantic colors, including the ink pair (text on
+ * surfaces): --ink-dark, --ink-light (see generated or example theme CSS).
+ *
+ * Everything below derives from those knobs plus theme colors.
+ */
+@custom-variant dark (&:where([data-theme="dark"] *));
+
+@theme inline {
+  /*
+   * Bridge theme CSS variables (under [data-theme], etc.) into Tailwind color
+   * utilities: bg-background, bg-primary, text-muted-foreground, border-border, …
+   */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-neutral: var(--neutral);
+  --color-neutral-foreground: var(--neutral-foreground);
+  --color-neutral-hover: var(--neutral-hover);
+  --color-neutral-active: var(--neutral-active);
+  --color-neutral-subtle: var(--neutral-subtle);
+  --color-neutral-subtle-foreground: var(--neutral-subtle-foreground);
+  --color-neutral-border: var(--neutral-border);
+  --color-ink-dark: var(--ink-dark);
+  --color-ink-light: var(--ink-light);
+
+  /* Intent colors (semantic tokens from theme CSS) */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+  --color-primary-subtle: var(--primary-subtle);
+  --color-primary-subtle-foreground: var(--primary-subtle-foreground);
+  --color-primary-border: var(--primary-border);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-danger-hover: var(--danger-hover);
+  --color-danger-active: var(--danger-active);
+  --color-danger-subtle: var(--danger-subtle);
+  --color-danger-subtle-foreground: var(--danger-subtle-foreground);
+  --color-danger-border: var(--danger-border);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-info-hover: var(--info-hover);
+  --color-info-active: var(--info-active);
+  --color-info-subtle: var(--info-subtle);
+  --color-info-subtle-foreground: var(--info-subtle-foreground);
+  --color-info-border: var(--info-border);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-hover: var(--success-hover);
+  --color-success-active: var(--success-active);
+  --color-success-subtle: var(--success-subtle);
+  --color-success-subtle-foreground: var(--success-subtle-foreground);
+  --color-success-border: var(--success-border);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-hover: var(--warning-hover);
+  --color-warning-active: var(--warning-active);
+  --color-warning-subtle: var(--warning-subtle);
+  --color-warning-subtle-foreground: var(--warning-subtle-foreground);
+  --color-warning-border: var(--warning-border);
+
+  /* ── Spacing ── */
+  --spacing: calc(0.25rem * var(--density, 1));
+
+  /* ── Radius scale (derived from base --radius) ── */
+  --radius-xs: calc(var(--radius, 0.625rem) * 0.4);
+  --radius-sm: calc(var(--radius, 0.625rem) * 0.6);
+  --radius-md: calc(var(--radius, 0.625rem) * 0.8);
+  --radius-lg: var(--radius, 0.625rem);
+  --radius-xl: calc(var(--radius, 0.625rem) * 1.4);
+  --radius-2xl: calc(var(--radius, 0.625rem) * 1.8);
+  --radius-3xl: calc(var(--radius, 0.625rem) * 2.2);
+  --radius-4xl: calc(var(--radius, 0.625rem) * 2.6);
+
+  /* ── Typography scale (density-dampened at 50% rate) ── */
+  --text-xs: calc(0.75rem * (1 + (var(--density, 1) - 1) * 0.5));
+  --text-xs--line-height: calc(1 / 0.75);
+  --text-sm: calc(0.875rem * (1 + (var(--density, 1) - 1) * 0.5));
+  --text-sm--line-height: calc(1.25 / 0.875);
+  --text-base: calc(1rem * (1 + (var(--density, 1) - 1) * 0.5));
+  --text-base--line-height: calc(1.5 / 1);
+  --text-lg: calc(1.125rem * (1 + (var(--density, 1) - 1) * 0.5));
+  --text-lg--line-height: calc(1.75 / 1.125);
+  --text-xl: calc(1.25rem * (1 + (var(--density, 1) - 1) * 0.5));
+  --text-xl--line-height: calc(1.75 / 1.25);
+  --text-2xl: calc(1.5rem * (1 + (var(--density, 1) - 1) * 0.5));
+  --text-2xl--line-height: calc(2 / 1.5);
+  --text-3xl: calc(1.875rem * (1 + (var(--density, 1) - 1) * 0.5));
+  --text-3xl--line-height: calc(2.25 / 1.875);
+
+  /* ── Font weights ── */
+  --font-weight-thin: 100;
+  --font-weight-extralight: 200;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
+  /* ── Letter spacing ── */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  /* ── Line height ── */
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+
+  /* ── Shadows ── */
+  --shadow-2xs: 0 1px rgb(0 0 0 / 0.05);
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  /* ── Easing ── */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Animations ── */
+  --animate-spin: spin 1s linear infinite;
+  --animate-ping: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-bounce: bounce 1s infinite;
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes ping {
+    75%, 100% { transform: scale(2); opacity: 0; }
+  }
+  @keyframes pulse {
+    50% { opacity: 0.5; }
+  }
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(-25%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: none;
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+}

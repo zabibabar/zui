@@ -1,0 +1,30 @@
+{
+  "colorIntents": {
+    "base": {
+      "light": 0,
+      "dark": -1
+    },
+    "foreground": {
+      "description": "Auto-computed from contrast calculator against the base shade"
+    },
+    "hover": {
+      "light": 1,
+      "dark": -3
+    },
+    "active": {
+      "light": 2,
+      "dark": -4
+    },
+    "subtle": {
+      "light": -5,
+      "dark": 5
+    },
+    "subtleForeground": {
+      "description": "Auto-computed from contrast calculator against the subtle shade"
+    },
+    "border": {
+      "light": -3,
+      "dark": 1
+    }
+  }
+}
