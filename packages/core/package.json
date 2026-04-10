@@ -8,7 +8,7 @@
       "types": "./src/index.ts",
       "default": "./src/index.ts"
     },
-    "./theme-contract.json": "./src/tokens/schema/theme-contract.json"
+    "./theme-contract.json": "./src/schema/theme-contract.json"
   },
   "files": [
     "src",

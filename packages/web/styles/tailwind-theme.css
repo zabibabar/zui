@@ -150,7 +150,7 @@
   --animate-spin: spin 1s linear infinite;
   --animate-ping: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
   --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  --animate-bounce: bounce 1s infinite;
+  --animate-bounce: bounce 1s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
 
   @keyframes spin {
     to { transform: rotate(360deg); }
@@ -171,4 +171,369 @@
       animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
   }
+
+  /* ── Accordion ── */
+  --spacing-accordion-trigger-y: calc(var(--spacing) * 4);
+  --font-size-accordion-trigger: var(--text-sm);
+  --font-weight-accordion-trigger: var(--font-weight-medium);
+  --spacing-accordion-trigger-icon: calc(var(--spacing) * 4);
+  --font-size-accordion-content: var(--text-sm);
+
+  /* ── Alert ── */
+  --spacing-alert: calc(var(--spacing) * 4);
+  --spacing-alert-gap: calc(var(--spacing) * 3);
+  --radius-alert: var(--radius-lg);
+
+  /* ── Avatar ── */
+  --spacing-avatar-sm: calc(var(--spacing) * 8);
+  --font-size-avatar-sm: var(--text-xs);
+  --spacing-avatar-md: calc(var(--spacing) * 10);
+  --font-size-avatar-md: var(--text-sm);
+  --spacing-avatar-lg: calc(var(--spacing) * 12);
+  --font-size-avatar-lg: var(--text-base);
+
+  /* ── Badge ── */
+  --spacing-badge-x: calc(var(--spacing) * 2);
+  --spacing-badge-y: calc(var(--spacing) * 0.5);
+  --spacing-badge-gap: calc(var(--spacing) * 1);
+  --font-size-badge: var(--text-xs);
+  --font-weight-badge: var(--font-weight-medium);
+  --radius-badge: var(--radius-md);
+
+  /* ── Breadcrumb ── */
+  --spacing-breadcrumb-gap: calc(var(--spacing) * 1.5);
+  --font-size-breadcrumb: var(--text-sm);
+  --spacing-breadcrumb-sep-icon: calc(var(--spacing) * 3.5);
+
+  /* ── Button ── */
+  --spacing-btn-gap: calc(var(--spacing) * 2);
+  --font-weight-btn: var(--font-weight-medium);
+  --spacing-btn-xs: calc(var(--spacing) * 7);
+  --spacing-btn-xs-x: calc(var(--spacing) * 2.5);
+  --font-size-btn-xs: var(--text-xs);
+  --radius-btn-xs: var(--radius-sm);
+  --spacing-btn-sm: calc(var(--spacing) * 8);
+  --spacing-btn-sm-x: calc(var(--spacing) * 3);
+  --font-size-btn-sm: var(--text-sm);
+  --radius-btn-sm: var(--radius-sm);
+  --spacing-btn-md: calc(var(--spacing) * 9);
+  --spacing-btn-md-x: calc(var(--spacing) * 4);
+  --font-size-btn-md: var(--text-sm);
+  --radius-btn-md: var(--radius-md);
+  --spacing-btn-lg: calc(var(--spacing) * 10);
+  --spacing-btn-lg-x: calc(var(--spacing) * 5);
+  --font-size-btn-lg: var(--text-base);
+  --radius-btn-lg: var(--radius-md);
+  --spacing-btn-xl: calc(var(--spacing) * 12);
+  --spacing-btn-xl-x: calc(var(--spacing) * 6);
+  --font-size-btn-xl: var(--text-base);
+  --radius-btn-xl: var(--radius-lg);
+
+  /* ── Card ── */
+  --radius-card: var(--radius-lg);
+  --spacing-card-header: calc(var(--spacing) * 6);
+  --spacing-card-header-gap: calc(var(--spacing) * 1.5);
+  --font-size-card-title: var(--text-lg);
+  --font-weight-card-title: var(--font-weight-semibold);
+  --tracking-card-title: var(--tracking-tight);
+  --font-size-card-desc: var(--text-sm);
+  --spacing-card-content-x: calc(var(--spacing) * 6);
+  --spacing-card-content-b: calc(var(--spacing) * 6);
+  --spacing-card-footer-x: calc(var(--spacing) * 6);
+  --spacing-card-footer-b: calc(var(--spacing) * 6);
+
+  /* ── Checkbox ── */
+  --spacing-checkbox: calc(var(--spacing) * 4.5);
+  --radius-checkbox: var(--radius-sm);
+
+  /* ── Command ── */
+  --radius-command-root: var(--radius-md);
+  --spacing-command-input: calc(var(--spacing) * 10);
+  --spacing-command-input-x: calc(var(--spacing) * 3);
+  --spacing-command-input-y: calc(var(--spacing) * 2);
+  --font-size-command-input: var(--text-sm);
+  --max-height-command-list: 18rem;
+  --spacing-command-list: calc(var(--spacing) * 1);
+  --spacing-command-empty-y: calc(var(--spacing) * 6);
+  --font-size-command-empty: var(--text-sm);
+  --spacing-command-group-heading-x: calc(var(--spacing) * 2);
+  --spacing-command-group-heading-y: calc(var(--spacing) * 1.5);
+  --font-size-command-group-heading: var(--text-xs);
+  --font-weight-command-group-heading: var(--font-weight-medium);
+  --spacing-command-item-x: calc(var(--spacing) * 2);
+  --spacing-command-item-y: calc(var(--spacing) * 1.5);
+  --font-size-command-item: var(--text-sm);
+  --radius-command-item: var(--radius-sm);
+  --font-size-command-shortcut: var(--text-xs);
+  --tracking-command-shortcut: var(--tracking-widest);
+
+  /* ── Context Menu ── */
+  --min-width-context-menu-content: 10rem;
+  --spacing-context-menu-content: calc(var(--spacing) * 1);
+  --shadow-context-menu-content: var(--shadow-xl);
+  --radius-context-menu-content: var(--radius-md);
+  --spacing-context-menu-item-x: calc(var(--spacing) * 2);
+  --spacing-context-menu-item-y: calc(var(--spacing) * 1.5);
+  --font-size-context-menu-item: var(--text-sm);
+  --radius-context-menu-item: var(--radius-sm);
+  --spacing-context-menu-label-x: calc(var(--spacing) * 2);
+  --spacing-context-menu-label-y: calc(var(--spacing) * 1.5);
+  --font-size-context-menu-label: var(--text-xs);
+  --font-weight-context-menu-label: var(--font-weight-semibold);
+  --font-size-context-menu-shortcut: var(--text-xs);
+  --tracking-context-menu-shortcut: var(--tracking-widest);
+
+  /* ── Dialog ── */
+  --max-width-dialog-content: 32rem;
+  --spacing-dialog-content: calc(var(--spacing) * 6);
+  --spacing-dialog-content-gap: calc(var(--spacing) * 4);
+  --radius-dialog-content: var(--radius-lg);
+  --shadow-dialog-content: var(--shadow-xl);
+  --spacing-dialog-header-gap: calc(var(--spacing) * 1.5);
+  --font-size-dialog-title: var(--text-lg);
+  --font-weight-dialog-title: var(--font-weight-semibold);
+  --tracking-dialog-title: var(--tracking-tight);
+  --font-size-dialog-desc: var(--text-sm);
+
+  /* ── Drawer ── */
+  --max-width-drawer-content: 24rem;
+  --spacing-drawer-content: calc(var(--spacing) * 6);
+  --spacing-drawer-content-gap: calc(var(--spacing) * 4);
+  --shadow-drawer-content: var(--shadow-xl);
+  --spacing-drawer-header-gap: calc(var(--spacing) * 1.5);
+  --font-size-drawer-title: var(--text-lg);
+  --font-weight-drawer-title: var(--font-weight-semibold);
+  --tracking-drawer-title: var(--tracking-tight);
+  --font-size-drawer-desc: var(--text-sm);
+
+  /* ── Dropdown Menu ── */
+  --min-width-dropdown-menu-content: 10rem;
+  --spacing-dropdown-menu-content: calc(var(--spacing) * 1);
+  --shadow-dropdown-menu-content: var(--shadow-xl);
+  --radius-dropdown-menu-content: var(--radius-md);
+  --spacing-dropdown-menu-item-x: calc(var(--spacing) * 2);
+  --spacing-dropdown-menu-item-y: calc(var(--spacing) * 1.5);
+  --font-size-dropdown-menu-item: var(--text-sm);
+  --radius-dropdown-menu-item: var(--radius-sm);
+  --spacing-dropdown-menu-label-x: calc(var(--spacing) * 2);
+  --spacing-dropdown-menu-label-y: calc(var(--spacing) * 1.5);
+  --font-size-dropdown-menu-label: var(--text-xs);
+  --font-weight-dropdown-menu-label: var(--font-weight-semibold);
+  --font-size-dropdown-menu-shortcut: var(--text-xs);
+  --tracking-dropdown-menu-shortcut: var(--tracking-widest);
+
+  /* ── Input ── */
+  --spacing-input-field: calc(var(--spacing) * 9);
+  --spacing-input-field-x: calc(var(--spacing) * 3);
+  --spacing-input-field-y: calc(var(--spacing) * 2);
+  --font-size-input-field: var(--text-sm);
+  --radius-input-field: var(--radius-md);
+
+  /* ── Label ── */
+  --font-size-label: var(--text-sm);
+  --font-weight-label: var(--font-weight-medium);
+
+  /* ── Menubar ── */
+  --spacing-menubar-bar: calc(var(--spacing) * 9);
+  --spacing-menubar-bar-p: calc(var(--spacing) * 1);
+  --spacing-menubar-bar-gap: calc(var(--spacing) * 1);
+  --radius-menubar-bar: var(--radius-md);
+  --shadow-menubar-bar: var(--shadow-sm);
+  --spacing-menubar-trigger-x: calc(var(--spacing) * 3);
+  --spacing-menubar-trigger-y: calc(var(--spacing) * 1.5);
+  --font-size-menubar-trigger: var(--text-sm);
+  --font-weight-menubar-trigger: var(--font-weight-medium);
+  --radius-menubar-trigger: var(--radius-sm);
+  --min-width-menubar-menu-content: 10rem;
+  --spacing-menubar-menu-content: calc(var(--spacing) * 1);
+  --shadow-menubar-menu-content: var(--shadow-xl);
+  --radius-menubar-menu-content: var(--radius-md);
+  --spacing-menubar-menu-item-x: calc(var(--spacing) * 2);
+  --spacing-menubar-menu-item-y: calc(var(--spacing) * 1.5);
+  --font-size-menubar-menu-item: var(--text-sm);
+  --radius-menubar-menu-item: var(--radius-sm);
+  --spacing-menubar-menu-label-x: calc(var(--spacing) * 2);
+  --spacing-menubar-menu-label-y: calc(var(--spacing) * 1.5);
+  --font-size-menubar-menu-label: var(--text-xs);
+  --font-weight-menubar-menu-label: var(--font-weight-semibold);
+  --font-size-menubar-menu-shortcut: var(--text-xs);
+  --tracking-menubar-menu-shortcut: var(--tracking-widest);
+
+  /* ── Pagination ── */
+  --spacing-pagination-gap: calc(var(--spacing) * 1);
+
+  /* ── Popover ── */
+  --spacing-popover-w: calc(var(--spacing) * 72);
+  --spacing-popover: calc(var(--spacing) * 4);
+  --shadow-popover: var(--shadow-xl);
+  --radius-popover: var(--radius-md);
+
+  /* ── Progress ── */
+  --spacing-progress-track: calc(var(--spacing) * 2);
+  --radius-progress-track: var(--radius-xl);
+
+  /* ── Radio ── */
+  --spacing-radio: calc(var(--spacing) * 4.5);
+  --spacing-radio-gap: calc(var(--spacing) * 2);
+
+  /* ── Scroll Area ── */
+  --spacing-scroll-area-scrollbar: calc(var(--spacing) * 0.5);
+  --spacing-scroll-area-scrollbar-w: calc(var(--spacing) * 2.5);
+
+  /* ── Select ── */
+  --spacing-select-trigger: calc(var(--spacing) * 9);
+  --spacing-select-trigger-x: calc(var(--spacing) * 3);
+  --spacing-select-trigger-y: calc(var(--spacing) * 2);
+  --spacing-select-trigger-gap: calc(var(--spacing) * 2);
+  --font-size-select-trigger: var(--text-sm);
+  --radius-select-trigger: var(--radius-md);
+  --spacing-select-trigger-icon: calc(var(--spacing) * 4);
+  --spacing-select-viewport: calc(var(--spacing) * 1);
+  --spacing-select-item-y: calc(var(--spacing) * 1.5);
+  --spacing-select-item-pl: calc(var(--spacing) * 8);
+  --spacing-select-item-pr: calc(var(--spacing) * 2);
+  --font-size-select-item: var(--text-sm);
+  --radius-select-item: var(--radius-sm);
+
+  /* ── Separator ── */
+  --spacing-separator: calc(var(--spacing) * 1);
+
+  /* ── Sidebar ── */
+  --spacing-sidebar-w: calc(var(--spacing) * 64);
+  --spacing-sidebar-header: calc(var(--spacing) * 4);
+  --spacing-sidebar-section: calc(var(--spacing) * 2);
+  --spacing-sidebar-section-gap: calc(var(--spacing) * 1);
+  --spacing-sidebar-section-title-x: calc(var(--spacing) * 2);
+  --spacing-sidebar-section-title-y: calc(var(--spacing) * 1.5);
+  --font-size-sidebar-section-title: var(--text-xs);
+  --font-weight-sidebar-section-title: var(--font-weight-semibold);
+  --spacing-sidebar-nav-item-x: calc(var(--spacing) * 3);
+  --spacing-sidebar-nav-item-y: calc(var(--spacing) * 2);
+  --font-size-sidebar-nav-item: var(--text-sm);
+  --radius-sidebar-nav-item: var(--radius-md);
+
+  /* ── Skeleton ── */
+  --radius-skeleton: var(--radius-md);
+
+  /* ── Slider ── */
+  --spacing-slider-track: calc(var(--spacing) * 2);
+  --radius-slider-track: var(--radius-xl);
+  --spacing-slider-thumb: calc(var(--spacing) * 5);
+  --radius-slider-thumb: var(--radius-xl);
+
+  /* ── Spinner ── */
+  --spacing-spinner-sm: calc(var(--spacing) * 3);
+  --spacing-spinner-md: calc(var(--spacing) * 4);
+  --spacing-spinner-lg: calc(var(--spacing) * 6);
+
+  /* ── Switch ── */
+  --spacing-switch-root: calc(var(--spacing) * 6);
+  --spacing-switch-root-w: calc(var(--spacing) * 11);
+  --radius-switch-root: var(--radius-xl);
+  --spacing-switch-thumb: calc(var(--spacing) * 5);
+  --radius-switch-thumb: var(--radius-xl);
+  --spacing-switch-thumb-off: calc(var(--spacing) * 0.5);
+  --spacing-switch-thumb-on: calc(var(--spacing) * 5.5);
+
+  /* ── Table ── */
+  --radius-table-container: var(--radius-md);
+  --spacing-table-head: calc(var(--spacing) * 10);
+  --spacing-table-head-x: calc(var(--spacing) * 3);
+  --font-size-table-head: var(--text-xs);
+  --font-weight-table-head: var(--font-weight-semibold);
+  --spacing-table-cell: calc(var(--spacing) * 3);
+  --spacing-table-caption-mt: calc(var(--spacing) * 2);
+  --font-size-table-caption: var(--text-xs);
+
+  /* ── Tabs ── */
+  --spacing-tabs-list: calc(var(--spacing) * 10);
+  --spacing-tabs-list-p: calc(var(--spacing) * 1);
+  --radius-tabs-list: var(--radius-md);
+  --spacing-tabs-trigger-x: calc(var(--spacing) * 3);
+  --spacing-tabs-trigger-y: calc(var(--spacing) * 1.5);
+  --font-size-tabs-trigger: var(--text-sm);
+  --font-weight-tabs-trigger: var(--font-weight-medium);
+  --radius-tabs-trigger: var(--radius-sm);
+
+  /* ── Textarea ── */
+  --spacing-textarea: calc(var(--spacing) * 24);
+  --spacing-textarea-x: calc(var(--spacing) * 3);
+  --spacing-textarea-y: calc(var(--spacing) * 2);
+  --font-size-textarea: var(--text-sm);
+  --radius-textarea: var(--radius-md);
+
+  /* ── Toggle ── */
+  --spacing-toggle-gap: calc(var(--spacing) * 2);
+  --font-weight-toggle: var(--font-weight-medium);
+  --radius-toggle: var(--radius-md);
+  --spacing-toggle-sm: calc(var(--spacing) * 8);
+  --spacing-toggle-sm-min-w: calc(var(--spacing) * 8);
+  --spacing-toggle-sm-x: calc(var(--spacing) * 1.5);
+  --font-size-toggle-sm: var(--text-xs);
+  --spacing-toggle-md: calc(var(--spacing) * 9);
+  --spacing-toggle-md-min-w: calc(var(--spacing) * 9);
+  --spacing-toggle-md-x: calc(var(--spacing) * 2);
+  --font-size-toggle-md: var(--text-sm);
+  --spacing-toggle-lg: calc(var(--spacing) * 10);
+  --spacing-toggle-lg-min-w: calc(var(--spacing) * 10);
+  --spacing-toggle-lg-x: calc(var(--spacing) * 2.5);
+  --font-size-toggle-lg: var(--text-sm);
+
+  /* ── Toggle Group ── */
+  --spacing-toggle-group-root: calc(var(--spacing) * 0.5);
+  --radius-toggle-group-root: var(--radius-md);
+  --spacing-toggle-group-item-x: calc(var(--spacing) * 2);
+  --spacing-toggle-group-item-y: calc(var(--spacing) * 1.5);
+  --font-size-toggle-group-item: var(--text-sm);
+  --font-weight-toggle-group-item: var(--font-weight-medium);
+  --radius-toggle-group-item: var(--radius-sm);
+
+  /* ── Toolbar ── */
+  --spacing-toolbar-x: calc(var(--spacing) * 3);
+  --spacing-toolbar-y: calc(var(--spacing) * 2);
+  --spacing-toolbar-gap: calc(var(--spacing) * 2);
+
+  /* ── Tooltip ── */
+  --spacing-tooltip-x: calc(var(--spacing) * 3);
+  --spacing-tooltip-y: calc(var(--spacing) * 1.5);
+  --font-size-tooltip: var(--text-xs);
+  --shadow-tooltip: var(--shadow-md);
+  --radius-tooltip: var(--radius-md);
+
+  /* ── Typography ── */
+  --font-size-typography-h1: var(--text-2xl);
+  --font-weight-typography-h1: var(--font-weight-bold);
+  --tracking-typography-h1: var(--tracking-tight);
+  --font-size-typography-h1-resp: var(--text-3xl);
+  --font-size-typography-h2: var(--text-xl);
+  --font-weight-typography-h2: var(--font-weight-semibold);
+  --tracking-typography-h2: var(--tracking-tight);
+  --font-size-typography-h2-resp: var(--text-2xl);
+  --font-size-typography-h3: var(--text-lg);
+  --font-weight-typography-h3: var(--font-weight-semibold);
+  --tracking-typography-h3: var(--tracking-tight);
+  --font-size-typography-h4: var(--text-base);
+  --font-weight-typography-h4: var(--font-weight-semibold);
+  --tracking-typography-h4: var(--tracking-tight);
+  --font-size-typography-h5: var(--text-sm);
+  --font-weight-typography-h5: var(--font-weight-semibold);
+  --tracking-typography-h5: var(--tracking-tight);
+  --font-size-typography-h6: var(--text-xs);
+  --font-weight-typography-h6: var(--font-weight-semibold);
+  --tracking-typography-h6: var(--tracking-tight);
+  --font-size-typography-subtitle1: var(--text-lg);
+  --font-weight-typography-subtitle1: var(--font-weight-normal);
+  --font-size-typography-subtitle2: var(--text-sm);
+  --font-weight-typography-subtitle2: var(--font-weight-medium);
+  --font-size-typography-body1: var(--text-base);
+  --font-weight-typography-body1: var(--font-weight-normal);
+  --font-size-typography-body2: var(--text-sm);
+  --font-weight-typography-body2: var(--font-weight-normal);
+  --font-size-typography-caption: var(--text-xs);
+  --font-weight-typography-caption: var(--font-weight-normal);
+  --font-size-typography-overline: var(--text-xs);
+  --font-weight-typography-overline: var(--font-weight-normal);
+  --tracking-typography-overline: var(--tracking-widest);
+  --font-size-typography-button: var(--text-sm);
+  --font-weight-typography-button: var(--font-weight-medium);
 }

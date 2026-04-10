@@ -1,6 +1,13 @@
-import type { ColorSeed, LightnessCurve, OklchColor, Palette, Shade, ShadeEntry } from './types'
-import defaultCurveJson from './tokens/primitives/default-lightness-curve.json'
-import { SHADE_KEYS } from './types'
+import type {
+  ColorSeed,
+  LightnessCurve,
+  OklchColor,
+  Palette,
+  Shade,
+  ShadeEntry,
+} from '../types/theme'
+import defaultCurveJson from '../primitives/default-lightness-curve.json'
+import { SHADE_KEYS } from '../types/theme'
 
 const DEFAULT_LIGHTNESS_CURVE = defaultCurveJson as LightnessCurve
 
@@ -112,16 +119,6 @@ function oklabToLinearSrgb(L: number, a: number, b: number): [number, number, nu
   const bOut = -0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s
 
   return [r, g, bOut]
-}
-
-/**
- * Convert an OKLCH color to a CSS-compatible oklch() string.
- */
-export function oklchToCss(color: OklchColor): string {
-  const l = Math.round(color.l * 10000) / 10000
-  const c = Math.round(color.c * 10000) / 10000
-  const h = Math.round(color.h * 100) / 100
-  return `oklch(${l} ${c} ${h})`
 }
 
 /**

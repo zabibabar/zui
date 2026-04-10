@@ -6,13 +6,13 @@ export const accordionItemVariants = tv({
 
 export const accordionTriggerVariants = tv({
   base: [
-    'flex w-full items-center justify-between py-4 text-left text-sm font-medium text-foreground',
+    'flex w-full items-center justify-between py-accordion-trigger-y text-left text-accordion-trigger font-accordion-trigger text-foreground',
     'transition-colors hover:text-primary',
-    '[&>svg]:h-4 [&>svg]:w-4 [&>svg]:shrink-0 [&>svg]:transition-transform',
+    '[&>svg]:size-accordion-trigger-icon [&>svg]:shrink-0 [&>svg]:transition-transform',
     'data-[state=open]:[&>svg]:rotate-180',
   ],
 })
 
 export const accordionContentVariants = tv({
-  base: 'overflow-hidden text-sm text-muted-foreground',
+  base: 'overflow-hidden text-accordion-content text-muted-foreground',
 })

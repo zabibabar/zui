@@ -1,5 +1,6 @@
 import type { GeneratedTheme, OklchColor } from '@zui/core'
-import { oklchToCss, SHADE_KEYS } from '@zui/core'
+import { SHADE_KEYS } from '@zui/core'
+import { oklchToCss } from './format'
 
 function cssVar(name: string, value: string): string {
   return `--${name}: ${value};`

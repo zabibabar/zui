@@ -1,8 +1,8 @@
-import type { InkColors, OklchColor } from '../types'
+import type { InkColors, OklchColor } from '../types/theme'
 import { describe, expect, it } from 'vitest'
-import { assignForegrounds, contrastRatio, parseOklchString, pickForeground } from '../contrast'
-import { generatePalette } from '../palette'
-import { SHADE_KEYS } from '../types'
+import { SHADE_KEYS } from '../types/theme'
+import { assignForegrounds, contrastRatio, pickForeground } from '../utils/contrast'
+import { generatePalette } from '../utils/palette'
 
 const darkInk: OklchColor = { l: 0.145, c: 0.02, h: 220 }
 const lightInk: OklchColor = { l: 0.985, c: 0.005, h: 220 }
@@ -95,19 +95,5 @@ describe('assignForegrounds', () => {
         expect(ratio).toBeGreaterThanOrEqual(3)
       }
     }
-  })
-})
-
-describe('parseOklchString', () => {
-  it('parses a valid oklch CSS string', () => {
-    const color = parseOklchString('oklch(0.55 0.15 230)')
-    expect(color.l).toBe(0.55)
-    expect(color.c).toBe(0.15)
-    expect(color.h).toBe(230)
-  })
-
-  it('throws on invalid format', () => {
-    expect(() => parseOklchString('rgb(255, 0, 0)')).toThrow()
-    expect(() => parseOklchString('not a color')).toThrow()
   })
 })

@@ -207,6 +207,6 @@ export function exportThemeBundle({ themeCss, tailwindThemeCss }: ExportThemeBun
   for (const file of files) file.crc32 = crc32(file.bytes)
 
   const archive = buildZip(files)
-  const blob = new Blob([archive], { type: 'application/zip' })
+  const blob = new Blob([archive.buffer as ArrayBuffer], { type: 'application/zip' })
   downloadBlob('zui-theme-export.zip', blob)
 }

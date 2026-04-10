@@ -14,11 +14,11 @@ describe('buildThemeCss', () => {
     const css = buildThemeCss({
       ...defaultPlaygroundThemeState(),
       ink: {
-        dark: 'oklch(0.2 0.02 260)',
-        light: 'oklch(0.96 0.01 260)',
+        dark: { l: 0.2, c: 0.02, h: 260 },
+        light: { l: 0.96, c: 0.01, h: 260 },
       },
       surfaces: {
-        base: 'oklch(0.97 0.02 85)',
+        base: { l: 0.97, c: 0.02, h: 85 },
       },
     })
     expect(css).toContain('oklch(0.2 0.02 260)')
@@ -29,7 +29,7 @@ describe('buildThemeCss', () => {
     const css = buildThemeCss({
       ...defaultPlaygroundThemeState(),
       chrome: {
-        ring: 'oklch(0.5 0.18 300)',
+        ring: { l: 0.5, c: 0.18, h: 300 },
       },
     })
     expect(css).toContain('oklch(0.5 0.18 300)')

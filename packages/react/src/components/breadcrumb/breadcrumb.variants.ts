@@ -1,7 +1,10 @@
 import { tv } from 'tailwind-variants'
 
 export const breadcrumbListVariants = tv({
-  base: ['flex flex-wrap items-center gap-1.5 break-words text-sm', 'text-muted-foreground'],
+  base: [
+    'flex flex-wrap items-center gap-breadcrumb-gap break-words text-breadcrumb',
+    'text-muted-foreground',
+  ],
 })
 
 export const breadcrumbLinkVariants = tv({
@@ -16,5 +19,5 @@ export const breadcrumbPageVariants = tv({
 })
 
 export const breadcrumbSeparatorVariants = tv({
-  base: '[&>svg]:size-3.5',
+  base: '[&>svg]:size-breadcrumb-sep-icon',
 })

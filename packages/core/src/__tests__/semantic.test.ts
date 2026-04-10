@@ -1,7 +1,5 @@
-import type { InkColors, OklchColor } from '../types'
+import type { InkColors, OklchColor } from '../types/theme'
 import { describe, expect, it } from 'vitest'
-import { assignForegrounds } from '../contrast'
-import { generatePalette } from '../palette'
 import {
   deriveMutedBackground,
   deriveMutedForeground,
@@ -11,8 +9,10 @@ import {
   resolveChrome,
   resolveInk,
   resolveSurfaces,
-} from '../semantic'
-import { SHADE_KEYS } from '../types'
+} from '../semantic/theme'
+import { SHADE_KEYS } from '../types/theme'
+import { assignForegrounds } from '../utils/contrast'
+import { generatePalette } from '../utils/palette'
 
 const darkInk: OklchColor = { l: 0.145, c: 0.02, h: 220 }
 const lightInk: OklchColor = { l: 0.985, c: 0.005, h: 220 }
@@ -140,7 +140,7 @@ describe('resolveChrome', () => {
 
   it('applies partial overrides: custom border keeps default input matching border', () => {
     const c = resolveChrome(lightS, 'light', primaryPal, {
-      border: 'oklch(0.75 0.05 90)',
+      border: { l: 0.75, c: 0.05, h: 90 },
     })
     expect(c.border.l).toBeCloseTo(0.75, 5)
     expect(c.input).toEqual(c.border)
@@ -148,9 +148,9 @@ describe('resolveChrome', () => {
 
   it('applies full overrides', () => {
     const c = resolveChrome(lightS, 'light', primaryPal, {
-      border: 'oklch(0.7 0.02 0)',
-      input: 'oklch(0.65 0.02 0)',
-      ring: 'oklch(0.6 0.2 300)',
+      border: { l: 0.7, c: 0.02, h: 0 },
+      input: { l: 0.65, c: 0.02, h: 0 },
+      ring: { l: 0.6, c: 0.2, h: 300 },
     })
     expect(c.border.l).toBe(0.7)
     expect(c.input.l).toBe(0.65)
@@ -174,14 +174,14 @@ describe('resolveInk', () => {
   })
 
   it('overrides dark ink when provided', () => {
-    const result = resolveInk({ dark: 'oklch(0.1 0.02 220)' })
+    const result = resolveInk({ dark: { l: 0.1, c: 0.02, h: 220 } })
     expect(result.dark.l).toBe(0.1)
     expect(result.dark.c).toBe(0.02)
     expect(result.light.l).toBe(0.985)
   })
 
   it('overrides light ink when provided', () => {
-    const result = resolveInk({ light: 'oklch(0.95 0.01 220)' })
+    const result = resolveInk({ light: { l: 0.95, c: 0.01, h: 220 } })
     expect(result.dark.l).toBe(0.145)
     expect(result.light.l).toBe(0.95)
     expect(result.light.c).toBe(0.01)
@@ -189,8 +189,8 @@ describe('resolveInk', () => {
 
   it('overrides both ink colors when both are provided', () => {
     const result = resolveInk({
-      dark: 'oklch(0.1 0.02 220)',
-      light: 'oklch(0.95 0.01 220)',
+      dark: { l: 0.1, c: 0.02, h: 220 },
+      light: { l: 0.95, c: 0.01, h: 220 },
     })
     expect(result.dark.l).toBe(0.1)
     expect(result.light.l).toBe(0.95)
@@ -213,14 +213,14 @@ describe('resolveSurfaces', () => {
   })
 
   it('derives raised from base when only base is provided (light)', () => {
-    const surfaces = resolveSurfaces('light', { base: 'oklch(0.96 0 0)' })
+    const surfaces = resolveSurfaces('light', { base: { l: 0.96, c: 0, h: 0 } })
     expect(surfaces.base.l).toBe(0.96)
     expect(surfaces.raised.l).toBeCloseTo(0.975, 3)
     expect(surfaces.overlay.l).toBeCloseTo(0.975, 3)
   })
 
   it('derives raised from base when only base is provided (dark)', () => {
-    const surfaces = resolveSurfaces('dark', { base: 'oklch(0.1 0 0)' })
+    const surfaces = resolveSurfaces('dark', { base: { l: 0.1, c: 0, h: 0 } })
     expect(surfaces.base.l).toBe(0.1)
     expect(surfaces.raised.l).toBeCloseTo(0.14, 3)
     expect(surfaces.overlay.l).toBeCloseTo(0.14, 3)
@@ -228,17 +228,17 @@ describe('resolveSurfaces', () => {
 
   it('overlay defaults to raised when only raised is provided', () => {
     const surfaces = resolveSurfaces('light', {
-      base: 'oklch(0.98 0 0)',
-      raised: 'oklch(0.99 0 0)',
+      base: { l: 0.98, c: 0, h: 0 },
+      raised: { l: 0.99, c: 0, h: 0 },
     })
     expect(surfaces.overlay.l).toBe(0.99)
   })
 
   it('allows full override of all surfaces', () => {
     const surfaces = resolveSurfaces('light', {
-      base: 'oklch(0.95 0.01 200)',
-      raised: 'oklch(0.97 0.01 200)',
-      overlay: 'oklch(0.99 0.01 200)',
+      base: { l: 0.95, c: 0.01, h: 200 },
+      raised: { l: 0.97, c: 0.01, h: 200 },
+      overlay: { l: 0.99, c: 0.01, h: 200 },
     })
     expect(surfaces.base.l).toBe(0.95)
     expect(surfaces.raised.l).toBe(0.97)
@@ -246,7 +246,7 @@ describe('resolveSurfaces', () => {
   })
 
   it('clamps raised lightness to 1 maximum', () => {
-    const surfaces = resolveSurfaces('light', { base: 'oklch(0.995 0 0)' })
+    const surfaces = resolveSurfaces('light', { base: { l: 0.995, c: 0, h: 0 } })
     expect(surfaces.raised.l).toBeLessThanOrEqual(1)
   })
 })
@@ -298,7 +298,7 @@ describe('generateTheme', () => {
 
   it('accepts custom surfaces via options', () => {
     const theme = generateTheme(palettes, 'light', {
-      surfaces: { base: 'oklch(0.96 0.01 200)' },
+      surfaces: { base: { l: 0.96, c: 0.01, h: 200 } },
     })
     expect(theme.surfaces.base.l).toBe(0.96)
     expect(theme.surfaces.base.c).toBe(0.01)
@@ -306,7 +306,7 @@ describe('generateTheme', () => {
 
   it('accepts custom ink via options', () => {
     const theme = generateTheme(palettes, 'light', {
-      ink: { dark: 'oklch(0.1 0.02 220)' },
+      ink: { dark: { l: 0.1, c: 0.02, h: 220 } },
     })
     expect(theme.ink.dark.l).toBe(0.1)
     expect(theme.ink.dark.c).toBe(0.02)
@@ -324,7 +324,7 @@ describe('generateTheme', () => {
 
   it('accepts custom chrome via options', () => {
     const theme = generateTheme(palettes, 'light', {
-      chrome: { ring: 'oklch(0.5 0.2 280)' },
+      chrome: { ring: { l: 0.5, c: 0.2, h: 280 } },
     })
     expect(theme.chrome.ring.h).toBe(280)
   })

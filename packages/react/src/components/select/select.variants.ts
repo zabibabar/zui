@@ -8,30 +8,33 @@ import {
 
 export const selectTriggerVariants = tv({
   base: [
-    'flex min-h-9 w-full items-center justify-between gap-2 rounded-md border border-input bg-background',
-    'px-3 py-2 text-sm text-foreground',
+    'flex min-h-select-trigger w-full items-center justify-between gap-select-trigger-gap rounded-select-trigger border border-input bg-background',
+    'px-select-trigger-x py-select-trigger-y text-select-trigger text-foreground',
     'placeholder:text-muted-foreground',
     'transition-[color,box-shadow,border-color] duration-150',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30',
     'disabled:cursor-not-allowed disabled:opacity-50',
-    '[&_svg]:h-4 [&_svg]:w-4 [&_svg]:text-muted-foreground',
+    '[&_svg]:size-select-trigger-icon [&_svg]:text-muted-foreground',
   ],
 })
 
 export const selectContentVariants = tv({
-  base: ['relative z-50 min-w-[8rem] overflow-hidden shadow-xl', ...overlaySurfaceBase],
+  base: ['relative z-50 min-w-[8rem] overflow-hidden rounded-md shadow-xl', ...overlaySurfaceBase],
 })
 
 export const selectViewportVariants = tv({
-  base: 'p-1',
+  base: 'p-select-viewport',
 })
 
 export const selectItemVariants = tv({
-  base: [...overlayInteractiveItemBase, 'w-full py-1.5 pl-8 pr-2'],
+  base: [
+    ...overlayInteractiveItemBase,
+    'w-full rounded-select-item text-select-item py-select-item-y pl-select-item-pl pr-select-item-pr',
+  ],
 })
 
 export const selectLabelVariants = tv({
-  base: overlayLabelBase,
+  base: [overlayLabelBase, 'px-2 py-1.5 text-xs font-semibold'],
 })
 
 export const selectSeparatorVariants = tv({

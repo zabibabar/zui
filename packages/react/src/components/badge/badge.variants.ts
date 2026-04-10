@@ -1,7 +1,7 @@
 import { tv } from 'tailwind-variants'
 
 export const badgeVariants = tv({
-  base: 'inline-flex items-center justify-center gap-1 rounded-md border px-2 py-0.5 text-xs font-medium whitespace-nowrap',
+  base: 'inline-flex items-center justify-center gap-badge-gap rounded-badge border px-badge-x py-badge-y text-badge font-badge whitespace-nowrap',
   variants: {
     variant: {
       solid: 'border-transparent',

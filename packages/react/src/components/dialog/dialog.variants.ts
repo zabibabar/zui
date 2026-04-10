@@ -10,8 +10,8 @@ export const dialogOverlayVariants = tv({
 
 export const dialogContentVariants = tv({
   base: [
-    'fixed left-1/2 top-1/2 z-50 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4',
-    'rounded-lg p-6 shadow-xl',
+    'fixed left-1/2 top-1/2 z-50 grid w-full max-w-dialog-content -translate-x-1/2 -translate-y-1/2 gap-dialog-content-gap',
+    'rounded-dialog-content p-dialog-content shadow-dialog-content',
     ...overlaySurfaceBase,
     'data-[state=open]:animate-[zui-dialog-content-in_200ms_ease-out_forwards]',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
@@ -19,13 +19,13 @@ export const dialogContentVariants = tv({
 })
 
 export const dialogHeaderVariants = tv({
-  base: 'flex flex-col gap-1.5 text-left',
+  base: 'flex flex-col gap-dialog-header-gap text-left',
 })
 
 export const dialogTitleVariants = tv({
-  base: 'text-lg font-semibold leading-none tracking-tight',
+  base: 'text-dialog-title font-dialog-title leading-none tracking-dialog-title',
 })
 
 export const dialogDescriptionVariants = tv({
-  base: 'text-sm text-muted-foreground',
+  base: 'text-dialog-desc text-muted-foreground',
 })

@@ -2,7 +2,7 @@ import type { VariantProps } from 'tailwind-variants'
 import { tv } from 'tailwind-variants'
 
 export const alertVariants = tv({
-  base: 'flex gap-3 rounded-lg border p-4 text-foreground',
+  base: 'flex gap-alert-gap rounded-alert border p-alert text-foreground',
   variants: {
     intent: {
       info: 'border-info-border bg-info-subtle [&_[data-slot=alert-title]]:text-info',

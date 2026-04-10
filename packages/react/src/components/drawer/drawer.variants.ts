@@ -9,7 +9,7 @@ export const drawerOverlayVariants = tv({
 
 export const drawerContentVariants = tv({
   base: [
-    'fixed top-0 z-50 flex h-full w-full max-w-sm flex-col gap-4 border-border bg-popover p-6 shadow-xl',
+    'fixed top-0 z-50 flex h-full w-full max-w-drawer-content flex-col gap-drawer-content-gap border-border bg-popover p-drawer-content shadow-drawer-content',
     'text-popover-foreground',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
   ],
@@ -31,13 +31,13 @@ export const drawerContentVariants = tv({
 })
 
 export const drawerHeaderVariants = tv({
-  base: 'flex flex-col gap-1.5 text-left',
+  base: 'flex flex-col gap-drawer-header-gap text-left',
 })
 
 export const drawerTitleVariants = tv({
-  base: 'text-lg font-semibold leading-none tracking-tight',
+  base: 'text-drawer-title font-drawer-title leading-none tracking-drawer-title',
 })
 
 export const drawerDescriptionVariants = tv({
-  base: 'text-sm text-muted-foreground',
+  base: 'text-drawer-desc text-muted-foreground',
 })

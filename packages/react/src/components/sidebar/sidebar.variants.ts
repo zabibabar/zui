@@ -1,24 +1,24 @@
 import { tv } from 'tailwind-variants'
 
 export const sidebarVariants = tv({
-  base: 'flex h-full w-64 flex-col border-r border-border bg-card text-card-foreground',
+  base: 'flex h-full w-sidebar-w flex-col border-r border-border bg-card text-card-foreground',
 })
 
 export const sidebarHeaderVariants = tv({
-  base: 'border-b border-border p-4',
+  base: 'border-b border-border p-sidebar-header',
 })
 
 export const sidebarSectionVariants = tv({
-  base: 'flex flex-col gap-1 p-2',
+  base: 'flex flex-col gap-sidebar-section-gap p-sidebar-section',
 })
 
 export const sidebarSectionTitleVariants = tv({
-  base: 'px-2 py-1.5 text-xs font-semibold text-muted-foreground',
+  base: 'px-sidebar-section-title-x py-sidebar-section-title-y text-sidebar-section-title font-sidebar-section-title text-muted-foreground',
 })
 
 export const sidebarNavItemVariants = tv({
   base: [
-    'w-full rounded-md px-3 py-2 text-left text-sm transition-colors',
+    'w-full rounded-sidebar-nav-item px-sidebar-nav-item-x py-sidebar-nav-item-y text-left text-sidebar-nav-item transition-colors',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
   ],
   variants: {

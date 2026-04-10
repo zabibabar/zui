@@ -13,12 +13,12 @@ import type {
   SurfaceConfig,
   SurfaceTokens,
   ThemeMode,
-} from './types'
-import { assignForegrounds, parseOklchString } from './contrast'
-import { generatePalette } from './palette'
-import { presets } from './presets'
-import colorMappingJson from './tokens/semantic/color-mapping.json'
-import { SHADE_KEYS } from './types'
+} from '../types/theme'
+import { presets } from '../primitives/presets'
+import { SHADE_KEYS } from '../types/theme'
+import { assignForegrounds } from '../utils/contrast'
+import { generatePalette } from '../utils/palette'
+import colorMappingJson from './color-mapping.json'
 
 interface ColorIntentOffsetMapping {
   readonly light: number
@@ -145,10 +145,10 @@ export function resolveChrome(
   config?: ChromeConfig,
 ): ChromeTokens {
   const borderDefault = defaultChromeBorderInput(surfaces, mode)
-  const border = config?.border ? parseOklchString(config.border) : borderDefault
-  const input = config?.input ? parseOklchString(config.input) : border
+  const border = config?.border ?? borderDefault
+  const input = config?.input ?? border
   const ringDefault = defaultRingFromPrimary(primaryPalette, mode)
-  const ring = config?.ring ? parseOklchString(config.ring) : ringDefault
+  const ring = config?.ring ?? ringDefault
   return { border, input, ring }
 }
 
@@ -193,8 +193,8 @@ export function mapSemanticColors(palette: Palette, mode: ThemeMode): SemanticCo
  */
 export function resolveInk(config?: InkConfig): InkColors {
   return {
-    dark: config?.dark ? parseOklchString(config.dark) : DEFAULT_INK.dark,
-    light: config?.light ? parseOklchString(config.light) : DEFAULT_INK.light,
+    dark: config?.dark ?? DEFAULT_INK.dark,
+    light: config?.light ?? DEFAULT_INK.light,
   }
 }
 
@@ -206,12 +206,12 @@ export function resolveInk(config?: InkConfig): InkColors {
 export function resolveSurfaces(mode: ThemeMode, config?: SurfaceConfig): SurfaceTokens {
   const defaults = DEFAULT_SURFACES[mode]
 
-  const base = config?.base ? parseOklchString(config.base) : defaults.base
+  const base = config?.base ?? defaults.base
 
   const raisedDefault = deriveSurfaceRaised(base, mode)
-  const raised = config?.raised ? parseOklchString(config.raised) : raisedDefault
+  const raised = config?.raised ?? raisedDefault
 
-  const overlay = config?.overlay ? parseOklchString(config.overlay) : raised
+  const overlay = config?.overlay ?? raised
 
   return { base, raised, overlay }
 }

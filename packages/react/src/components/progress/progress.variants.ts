@@ -1,7 +1,7 @@
 import { tv } from 'tailwind-variants'
 
 export const progressRootVariants = tv({
-  base: ['relative h-2 w-full overflow-hidden rounded-full', 'bg-muted'],
+  base: ['relative h-progress-track w-full overflow-hidden rounded-progress-track', 'bg-muted'],
 })
 
 export const progressIndicatorVariants = tv({

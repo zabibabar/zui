@@ -1,5 +1,4 @@
 @import 'react-day-picker/style.css';
-@import '@zui/web/styles/example-theme.css';
 
 @theme inline {
   /* Dialog / overlay */

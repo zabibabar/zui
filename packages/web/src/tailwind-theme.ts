@@ -1,6 +1,6 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { generateTailwindThemeCss } from './non-color-css'
 
 export interface WriteTailwindThemeCssOptions {
   destDir: string
@@ -15,7 +15,10 @@ export interface WriteTailwindThemeCssResult {
 }
 
 /**
- * Copy the canonical tailwind-theme.css into a consumer directory.
+ * Generate the canonical tailwind-theme.css into a consumer directory.
+ *
+ * The file content is derived from the structured non-color token data in
+ * `@zui/core`, so values stay in sync with the core token definitions.
  *
  * By default the function will NOT overwrite an existing file at the
  * destination path. Pass `overwrite: true` to refresh from the canonical
@@ -31,9 +34,7 @@ export function writeTailwindThemeCss(
     return { written: false, path: dest, skippedExisting: true }
   }
 
-  const thisDir = fileURLToPath(new URL('.', import.meta.url))
-  const source = resolve(thisDir, '..', 'styles', 'tailwind-theme.css')
-  const content = readFileSync(source, 'utf-8')
+  const content = generateTailwindThemeCss()
 
   mkdirSync(options.destDir, { recursive: true })
   writeFileSync(dest, content, 'utf-8')

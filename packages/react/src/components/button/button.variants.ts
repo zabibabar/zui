@@ -1,10 +1,9 @@
 import { tv } from 'tailwind-variants'
 
-/** Colors are explicit utilities (no CSS var indirection) so Tailwind maps them to theme tokens. */
 export const buttonVariants = tv({
   base: [
-    'inline-flex items-center justify-center gap-2',
-    'font-medium whitespace-nowrap',
+    'inline-flex items-center justify-center gap-btn-gap',
+    'font-btn whitespace-nowrap',
     'transition-colors duration-150',
     'focus-visible:outline-2 focus-visible:outline-offset-2',
     'disabled:pointer-events-none disabled:opacity-50',
@@ -26,11 +25,11 @@ export const buttonVariants = tv({
       neutral: 'focus-visible:outline-neutral',
     },
     size: {
-      xs: 'h-7 px-2.5 text-xs rounded-sm',
-      sm: 'h-8 px-3 text-sm rounded-sm',
-      md: 'h-9 px-4 text-sm rounded-md',
-      lg: 'h-10 px-5 text-base rounded-md',
-      xl: 'h-12 px-6 text-base rounded-lg',
+      xs: 'h-btn-xs px-btn-xs-x text-btn-xs rounded-btn-xs',
+      sm: 'h-btn-sm px-btn-sm-x text-btn-sm rounded-btn-sm',
+      md: 'h-btn-md px-btn-md-x text-btn-md rounded-btn-md',
+      lg: 'h-btn-lg px-btn-lg-x text-btn-lg rounded-btn-lg',
+      xl: 'h-btn-xl px-btn-xl-x text-btn-xl rounded-btn-xl',
     },
   },
   compoundVariants: [

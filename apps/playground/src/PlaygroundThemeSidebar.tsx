@@ -1,12 +1,11 @@
+import type { OklchColor } from '@zui/core'
 import type { ColorIntent, PlaygroundThemeState } from './theme-state'
 import {
   assignForegrounds,
   generatePalette,
   hexToOklch,
   normalizeHex6,
-  oklchToCss,
   oklchToHex,
-  parseOklchString,
   presets,
   resolveChrome,
   resolveInk,
@@ -181,10 +180,10 @@ export function PlaygroundThemeSidebar({
     })
   }
 
-  const setInkField = (key: 'dark' | 'light', css: string) => {
+  const setInkField = (key: 'dark' | 'light', color: OklchColor) => {
     onChange({
       ...state,
-      ink: { ...state.ink, [key]: css },
+      ink: { ...state.ink, [key]: color },
     })
   }
 
@@ -198,10 +197,10 @@ export function PlaygroundThemeSidebar({
     onChange({ ...state, ink: {} })
   }
 
-  const setSurfaceField = (key: 'base' | 'raised' | 'overlay', css: string) => {
+  const setSurfaceField = (key: 'base' | 'raised' | 'overlay', color: OklchColor) => {
     onChange({
       ...state,
-      surfaces: { ...state.surfaces, [key]: css },
+      surfaces: { ...state.surfaces, [key]: color },
     })
   }
 
@@ -215,10 +214,10 @@ export function PlaygroundThemeSidebar({
     onChange({ ...state, surfaces: {} })
   }
 
-  const setChromeField = (key: 'border' | 'input' | 'ring', css: string) => {
+  const setChromeField = (key: 'border' | 'input' | 'ring', color: OklchColor) => {
     onChange({
       ...state,
-      chrome: { ...state.chrome, [key]: css },
+      chrome: { ...state.chrome, [key]: color },
     })
   }
 
@@ -338,9 +337,7 @@ export function PlaygroundThemeSidebar({
                       </button>
                     </div>
                     {(['dark', 'light'] as const).map((key) => {
-                      const effective = state.ink[key]
-                        ? parseOklchString(state.ink[key]!)
-                        : resolvedInk[key]
+                      const effective = state.ink[key] ?? resolvedInk[key]
                       return (
                         <div key={key} className="space-y-2 rounded border border-border p-2">
                           <div className="flex items-center justify-between gap-2">
@@ -360,7 +357,7 @@ export function PlaygroundThemeSidebar({
                           <RgbColorPicker
                             idPrefix={`ink-${key}`}
                             hex={oklchToHex(effective)}
-                            onHexChange={(h) => setInkField(key, oklchToCss(hexToOklch(h)))}
+                            onHexChange={(h) => setInkField(key, hexToOklch(h))}
                           />
                         </div>
                       )
@@ -387,10 +384,7 @@ export function PlaygroundThemeSidebar({
                       </button>
                     </div>
                     {(['base', 'raised', 'overlay'] as const).map((key) => {
-                      const fallback = surfaceFallbackLight[key]
-                      const effective = state.surfaces[key]
-                        ? parseOklchString(state.surfaces[key]!)
-                        : fallback
+                      const effective = state.surfaces[key] ?? surfaceFallbackLight[key]
                       return (
                         <div key={key} className="space-y-2 rounded border border-border p-2">
                           <div className="flex items-center justify-between gap-2">
@@ -410,7 +404,7 @@ export function PlaygroundThemeSidebar({
                           <RgbColorPicker
                             idPrefix={`surface-${key}`}
                             hex={oklchToHex(effective)}
-                            onHexChange={(h) => setSurfaceField(key, oklchToCss(hexToOklch(h)))}
+                            onHexChange={(h) => setSurfaceField(key, hexToOklch(h))}
                           />
                         </div>
                       )
@@ -457,7 +451,7 @@ export function PlaygroundThemeSidebar({
                           <RgbColorPicker
                             idPrefix={`chrome-${key}`}
                             hex={oklchToHex(effective)}
-                            onHexChange={(h) => setChromeField(key, oklchToCss(hexToOklch(h)))}
+                            onHexChange={(h) => setChromeField(key, hexToOklch(h))}
                           />
                         </div>
                       )

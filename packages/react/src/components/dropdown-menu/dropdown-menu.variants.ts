@@ -7,15 +7,24 @@ import {
 } from '../../styles/overlay-classes'
 
 export const dropdownMenuContentVariants = tv({
-  base: ['z-50 min-w-[10rem] overflow-hidden p-1 shadow-xl', ...overlaySurfaceBase],
+  base: [
+    'z-50 min-w-dropdown-menu-content overflow-hidden rounded-dropdown-menu-content p-dropdown-menu-content shadow-dropdown-menu-content',
+    ...overlaySurfaceBase,
+  ],
 })
 
 export const dropdownMenuItemVariants = tv({
-  base: [...overlayInteractiveItemBase, 'px-2 py-1.5'],
+  base: [
+    ...overlayInteractiveItemBase,
+    'rounded-dropdown-menu-item px-dropdown-menu-item-x py-dropdown-menu-item-y text-dropdown-menu-item',
+  ],
 })
 
 export const dropdownMenuLabelVariants = tv({
-  base: overlayLabelBase,
+  base: [
+    overlayLabelBase,
+    'px-dropdown-menu-label-x py-dropdown-menu-label-y text-dropdown-menu-label font-dropdown-menu-label',
+  ],
 })
 
 export const dropdownMenuSeparatorVariants = tv({

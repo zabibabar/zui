@@ -1,15 +1,12 @@
 import { tv } from 'tailwind-variants'
 
 export const avatarRootVariants = tv({
-  base: [
-    'relative flex size-10 shrink-0 overflow-hidden rounded-full',
-    'border border-border bg-muted',
-  ],
+  base: ['relative flex shrink-0 overflow-hidden rounded-full', 'border border-border bg-muted'],
   variants: {
     size: {
-      sm: 'size-8 text-xs',
-      md: 'size-10 text-sm',
-      lg: 'size-12 text-base',
+      sm: 'size-avatar-sm text-avatar-sm',
+      md: 'size-avatar-md text-avatar-md',
+      lg: 'size-avatar-lg text-avatar-lg',
     },
   },
   defaultVariants: { size: 'md' },

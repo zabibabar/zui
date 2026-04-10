@@ -1,7 +1,7 @@
-import type { ComponentPropsWithoutRef, ElementRef, HTMLAttributes } from 'react'
+import type { ComponentPropsWithRef, HTMLAttributes, Ref } from 'react'
 import type { ControllerProps, FieldPath, FieldValues } from 'react-hook-form'
 import { Slot } from '@radix-ui/react-slot'
-import { createContext, forwardRef, useContext, useId } from 'react'
+import { createContext, use, useId } from 'react'
 import { Controller, FormProvider, useFormContext, useFormState } from 'react-hook-form'
 import { cn } from '../../utils/cn'
 import { Label } from '../label/label'
@@ -24,15 +24,15 @@ function FormField<
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({ ...props }: ControllerProps<TFieldValues, TName>) {
   return (
-    <FormFieldContext.Provider value={{ name: props.name }}>
+    <FormFieldContext value={{ name: props.name }}>
       <Controller {...props} />
-    </FormFieldContext.Provider>
+    </FormFieldContext>
   )
 }
 
 function useFormField() {
-  const fieldContext = useContext(FormFieldContext)
-  const itemContext = useContext(FormItemContext)
+  const fieldContext = use(FormFieldContext)
+  const itemContext = use(FormItemContext)
   const { getFieldState } = useFormContext()
   const formState = useFormState({ name: fieldContext.name })
   const fieldState = getFieldState(fieldContext.name, formState)
@@ -53,81 +53,84 @@ function useFormField() {
   }
 }
 
-const FormItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => {
-    const id = useId()
-    return (
-      <FormItemContext.Provider value={{ id }}>
-        <div ref={ref} className={cn('space-y-2', className)} {...props} />
-      </FormItemContext.Provider>
-    )
-  },
-)
+function FormItem({
+  className,
+  ref,
+  ...props
+}: HTMLAttributes<HTMLDivElement> & { ref?: Ref<HTMLDivElement> }) {
+  const id = useId()
+  return (
+    <FormItemContext value={{ id }}>
+      <div ref={ref} className={cn('space-y-2', className)} {...props} />
+    </FormItemContext>
+  )
+}
 FormItem.displayName = 'FormItem'
 
-const FormLabel = forwardRef<ElementRef<typeof Label>, ComponentPropsWithoutRef<typeof Label>>(
-  ({ className, ...props }, ref) => {
-    const { error, formItemId } = useFormField()
-    return (
-      <Label
-        ref={ref}
-        className={cn(error && 'text-danger', className)}
-        htmlFor={formItemId}
-        {...props}
-      />
-    )
-  },
-)
+function FormLabel({ className, ref, ...props }: ComponentPropsWithRef<typeof Label>) {
+  const { error, formItemId } = useFormField()
+  return (
+    <Label
+      ref={ref}
+      className={cn(error && 'text-danger', className)}
+      htmlFor={formItemId}
+      {...props}
+    />
+  )
+}
 FormLabel.displayName = 'FormLabel'
 
-const FormControl = forwardRef<ElementRef<typeof Slot>, ComponentPropsWithoutRef<typeof Slot>>(
-  ({ ...props }, ref) => {
-    const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
-    return (
-      <Slot
-        ref={ref}
-        id={formItemId}
-        aria-describedby={!error ? `${formDescriptionId}` : `${formDescriptionId} ${formMessageId}`}
-        aria-invalid={!!error}
-        {...props}
-      />
-    )
-  },
-)
+function FormControl({ ref, ...props }: ComponentPropsWithRef<typeof Slot>) {
+  const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
+  return (
+    <Slot
+      ref={ref}
+      id={formItemId}
+      aria-describedby={!error ? `${formDescriptionId}` : `${formDescriptionId} ${formMessageId}`}
+      aria-invalid={!!error}
+      {...props}
+    />
+  )
+}
 FormControl.displayName = 'FormControl'
 
-const FormDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
-  ({ className, ...props }, ref) => {
-    const { formDescriptionId } = useFormField()
-    return (
-      <p
-        ref={ref}
-        id={formDescriptionId}
-        className={cn('text-sm text-muted-foreground', className)}
-        {...props}
-      />
-    )
-  },
-)
+function FormDescription({
+  className,
+  ref,
+  ...props
+}: HTMLAttributes<HTMLParagraphElement> & { ref?: Ref<HTMLParagraphElement> }) {
+  const { formDescriptionId } = useFormField()
+  return (
+    <p
+      ref={ref}
+      id={formDescriptionId}
+      className={cn('text-sm text-muted-foreground', className)}
+      {...props}
+    />
+  )
+}
 FormDescription.displayName = 'FormDescription'
 
-const FormMessage = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
-  ({ className, children, ...props }, ref) => {
-    const { error, formMessageId } = useFormField()
-    const body = error ? String(error.message) : children
-    if (!body) return null
-    return (
-      <p
-        ref={ref}
-        id={formMessageId}
-        className={cn('text-sm font-medium text-danger', className)}
-        {...props}
-      >
-        {body}
-      </p>
-    )
-  },
-)
+function FormMessage({
+  className,
+  children,
+  ref,
+  ...props
+}: HTMLAttributes<HTMLParagraphElement> & { ref?: Ref<HTMLParagraphElement> }) {
+  const { error, formMessageId } = useFormField()
+  const body = error ? String(error.message) : children
+  if (!body) return null
+  return (
+    <p
+      ref={ref}
+      id={formMessageId}
+      className={cn('text-sm font-medium text-danger', className)}
+      {...props}
+    >
+      {body}
+    </p>
+  )
+}
 FormMessage.displayName = 'FormMessage'
 
 export {

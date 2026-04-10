@@ -1,6 +1,6 @@
-import type { InkColors, OklchColor, Palette, Shade, ShadeEntry } from './types'
+import type { InkColors, OklchColor, Palette, Shade, ShadeEntry } from '../types/theme'
+import { SHADE_KEYS } from '../types/theme'
 import { oklchToSrgb } from './palette'
-import { SHADE_KEYS } from './types'
 
 /**
  * Compute the relative luminance of an sRGB color.
@@ -26,24 +26,6 @@ export function contrastRatio(color1: OklchColor, color2: OklchColor): number {
   const darker = Math.min(lum1, lum2)
 
   return (lighter + 0.05) / (darker + 0.05)
-}
-
-const OKLCH_RE = /oklch\(\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)\s*\)/
-
-/**
- * Parse an OKLCH CSS string into an OklchColor object.
- * Accepts format: "oklch(L C H)"
- */
-export function parseOklchString(css: string): OklchColor {
-  const match = css.match(OKLCH_RE)
-  if (!match) {
-    throw new Error(`Invalid oklch string: "${css}"`)
-  }
-  return {
-    l: Number.parseFloat(match[1]),
-    c: Number.parseFloat(match[2]),
-    h: Number.parseFloat(match[3]),
-  }
 }
 
 /**

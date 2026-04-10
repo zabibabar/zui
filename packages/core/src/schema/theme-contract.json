@@ -30,53 +30,53 @@
     },
     "surfaces": {
       "type": "object",
-      "description": "Optional surface colors for canvas layering. Independent of the neutral palette. Each is an oklch() string. Omitted values cascade: raised derives from base, overlay matches raised.",
+      "description": "Optional surface colors for canvas layering. Independent of the neutral palette. Each is an OklchColor object { l, c, h }. Omitted values cascade: raised derives from base, overlay matches raised.",
       "properties": {
         "base": {
-          "type": "string",
-          "description": "App background (e.g. 'oklch(0.985 0 0)'). Default: oklch(0.985 0 0) light / oklch(0.13 0 0) dark."
+          "$ref": "#/$defs/oklchColor",
+          "description": "App background. Default: { l: 0.985, c: 0, h: 0 } light / { l: 0.13, c: 0, h: 0 } dark."
         },
         "raised": {
-          "type": "string",
-          "description": "Cards, sidebar, toolbar (e.g. 'oklch(1 0 0)'). Default: derived from base."
+          "$ref": "#/$defs/oklchColor",
+          "description": "Cards, sidebar, toolbar. Default: derived from base."
         },
         "overlay": {
-          "type": "string",
-          "description": "Dialogs, drawers, popovers (e.g. 'oklch(1 0 0)'). Default: same as raised."
+          "$ref": "#/$defs/oklchColor",
+          "description": "Dialogs, drawers, popovers. Default: same as raised."
         }
       },
       "additionalProperties": false
     },
     "ink": {
       "type": "object",
-      "description": "Optional ink colors for text on surfaces. Independent of the neutral palette. Default body text (--foreground, --card-foreground, --popover-foreground) aliases ink, not neutral. The system auto-selects dark or light ink for text on color intent shades.",
+      "description": "Optional ink colors for text on surfaces. Independent of the neutral palette. The system auto-selects dark or light ink for text on color intent shades.",
       "properties": {
         "dark": {
-          "type": "string",
-          "description": "Dark ink for text on light surfaces (e.g. 'oklch(0.145 0 0)'). Default: oklch(0.145 0 0)."
+          "$ref": "#/$defs/oklchColor",
+          "description": "Dark ink for text on light surfaces. Default: { l: 0.145, c: 0, h: 0 }."
         },
         "light": {
-          "type": "string",
-          "description": "Light ink for text on dark surfaces (e.g. 'oklch(0.985 0 0)'). Default: oklch(0.985 0 0)."
+          "$ref": "#/$defs/oklchColor",
+          "description": "Light ink for text on dark surfaces. Default: { l: 0.985, c: 0, h: 0 }."
         }
       },
       "additionalProperties": false
     },
     "chrome": {
       "type": "object",
-      "description": "Optional UI chrome: borders, inputs, and focus ring. Independent of the neutral palette. Each value is an oklch() string. Omitted border/input use defaults derived from surfaces; omitted ring uses the primary palette 300 stop.",
+      "description": "Optional UI chrome: borders, inputs, and focus ring. Independent of the neutral palette. Each value is an OklchColor object { l, c, h }. Omitted border/input use defaults derived from surfaces; omitted ring uses the primary palette 300 stop.",
       "properties": {
         "border": {
-          "type": "string",
-          "description": "Default hairlines and separators (--border). Default: derived from surface base/raised."
+          "$ref": "#/$defs/oklchColor",
+          "description": "Default hairlines and separators. Default: derived from surface base/raised."
         },
         "input": {
-          "type": "string",
-          "description": "Input borders (--input). Default: same as border when omitted."
+          "$ref": "#/$defs/oklchColor",
+          "description": "Input borders. Default: same as border when omitted."
         },
         "ring": {
-          "type": "string",
-          "description": "Focus ring color (--ring). Default: primary palette 300 stop (lighter brand tint)."
+          "$ref": "#/$defs/oklchColor",
+          "description": "Focus ring color. Default: primary palette 300 stop (lighter brand tint)."
         }
       },
       "additionalProperties": false
@@ -95,6 +95,32 @@
     }
   },
   "$defs": {
+    "oklchColor": {
+      "type": "object",
+      "description": "An OKLCH color with lightness, chroma, and hue components.",
+      "required": ["l", "c", "h"],
+      "properties": {
+        "l": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "OKLCH lightness (0 = black, 1 = white)"
+        },
+        "c": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.4,
+          "description": "OKLCH chroma (0 = gray, ~0.15 = vivid)"
+        },
+        "h": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 360,
+          "description": "OKLCH hue angle (0-360)"
+        }
+      },
+      "additionalProperties": false
+    },
     "colorSeed": {
       "type": "object",
       "required": ["hue", "chroma", "anchorLightness"],

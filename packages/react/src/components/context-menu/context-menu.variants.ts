@@ -7,15 +7,24 @@ import {
 } from '../../styles/overlay-classes'
 
 export const contextMenuContentVariants = tv({
-  base: ['z-50 min-w-[10rem] overflow-hidden p-1 shadow-xl', ...overlaySurfaceBase],
+  base: [
+    'z-50 min-w-context-menu-content overflow-hidden rounded-context-menu-content p-context-menu-content shadow-context-menu-content',
+    ...overlaySurfaceBase,
+  ],
 })
 
 export const contextMenuItemVariants = tv({
-  base: [...overlayInteractiveItemBase, 'px-2 py-1.5'],
+  base: [
+    ...overlayInteractiveItemBase,
+    'rounded-context-menu-item px-context-menu-item-x py-context-menu-item-y text-context-menu-item',
+  ],
 })
 
 export const contextMenuLabelVariants = tv({
-  base: overlayLabelBase,
+  base: [
+    overlayLabelBase,
+    'px-context-menu-label-x py-context-menu-label-y text-context-menu-label font-context-menu-label',
+  ],
 })
 
 export const contextMenuSeparatorVariants = tv({
@@ -23,5 +32,5 @@ export const contextMenuSeparatorVariants = tv({
 })
 
 export const contextMenuShortcutVariants = tv({
-  base: 'ml-auto text-xs tracking-widest text-muted-foreground',
+  base: 'ml-auto text-context-menu-shortcut tracking-context-menu-shortcut text-muted-foreground',
 })

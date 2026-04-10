@@ -1,6 +1,5 @@
-import type { ComponentPropsWithoutRef, ReactNode } from 'react'
+import type { ComponentPropsWithoutRef, ComponentPropsWithRef, ReactNode } from 'react'
 import { Slot } from '@radix-ui/react-slot'
-import { forwardRef } from 'react'
 import { cn } from '../../utils/cn'
 import {
   breadcrumbLinkVariants,
@@ -21,31 +20,29 @@ function Breadcrumb({ ...props }: ComponentPropsWithoutRef<'nav'>) {
   return <nav aria-label="breadcrumb" {...props} />
 }
 
-const BreadcrumbList = forwardRef<HTMLOListElement, ComponentPropsWithoutRef<'ol'>>(
-  ({ className, ...props }, ref) => (
-    <ol ref={ref} className={cn(breadcrumbListVariants(), className)} {...props} />
-  ),
-)
+function BreadcrumbList({ className, ref, ...props }: ComponentPropsWithRef<'ol'>) {
+  return <ol ref={ref} className={cn(breadcrumbListVariants(), className)} {...props} />
+}
 BreadcrumbList.displayName = 'BreadcrumbList'
 
-const BreadcrumbItem = forwardRef<HTMLLIElement, ComponentPropsWithoutRef<'li'>>(
-  ({ className, ...props }, ref) => (
-    <li ref={ref} className={cn('inline-flex items-center gap-1.5', className)} {...props} />
-  ),
-)
+function BreadcrumbItem({ className, ref, ...props }: ComponentPropsWithRef<'li'>) {
+  return <li ref={ref} className={cn('inline-flex items-center gap-1.5', className)} {...props} />
+}
 BreadcrumbItem.displayName = 'BreadcrumbItem'
 
-const BreadcrumbLink = forwardRef<
-  HTMLAnchorElement,
-  ComponentPropsWithoutRef<'a'> & { asChild?: boolean }
->(({ asChild, className, ...props }, ref) => {
+function BreadcrumbLink({
+  asChild,
+  className,
+  ref,
+  ...props
+}: ComponentPropsWithRef<'a'> & { asChild?: boolean }) {
   const Comp = asChild ? Slot : 'a'
   return <Comp ref={ref} className={cn(breadcrumbLinkVariants(), className)} {...props} />
-})
+}
 BreadcrumbLink.displayName = 'BreadcrumbLink'
 
-const BreadcrumbPage = forwardRef<HTMLSpanElement, ComponentPropsWithoutRef<'span'>>(
-  ({ className, ...props }, ref) => (
+function BreadcrumbPage({ className, ref, ...props }: ComponentPropsWithRef<'span'>) {
+  return (
     <span
       ref={ref}
       role="link"
@@ -54,8 +51,8 @@ const BreadcrumbPage = forwardRef<HTMLSpanElement, ComponentPropsWithoutRef<'spa
       className={cn(breadcrumbPageVariants(), className)}
       {...props}
     />
-  ),
-)
+  )
+}
 BreadcrumbPage.displayName = 'BreadcrumbPage'
 
 function BreadcrumbSeparator({

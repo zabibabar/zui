@@ -86,20 +86,20 @@ export interface GeneratedTheme {
 }
 
 export interface SurfaceConfig {
-  readonly base?: string
-  readonly raised?: string
-  readonly overlay?: string
+  readonly base?: OklchColor
+  readonly raised?: OklchColor
+  readonly overlay?: OklchColor
 }
 
 export interface InkConfig {
-  readonly dark?: string
-  readonly light?: string
+  readonly dark?: OklchColor
+  readonly light?: OklchColor
 }
 
 export interface ChromeConfig {
-  readonly border?: string
-  readonly input?: string
-  readonly ring?: string
+  readonly border?: OklchColor
+  readonly input?: OklchColor
+  readonly ring?: OklchColor
 }
 
 export interface ThemeConfig {

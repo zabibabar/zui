@@ -1,7 +1,7 @@
 import { tv } from 'tailwind-variants'
 
 export const tableContainerVariants = tv({
-  base: 'w-full overflow-auto rounded-md border border-border',
+  base: 'w-full overflow-auto rounded-table-container border border-border',
 })
 
 export const tableVariants = tv({
@@ -21,13 +21,13 @@ export const tableRowVariants = tv({
 })
 
 export const tableHeadVariants = tv({
-  base: 'h-10 px-3 text-left align-middle text-xs font-semibold text-muted-foreground',
+  base: 'h-table-head px-table-head-x text-left align-middle text-table-head font-table-head text-muted-foreground',
 })
 
 export const tableCellVariants = tv({
-  base: 'p-3 align-middle text-foreground',
+  base: 'p-table-cell align-middle text-foreground',
 })
 
 export const tableCaptionVariants = tv({
-  base: 'mt-2 text-xs text-muted-foreground',
+  base: 'mt-table-caption-mt text-table-caption text-muted-foreground',
 })

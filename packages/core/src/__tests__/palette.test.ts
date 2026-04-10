@@ -1,15 +1,14 @@
-import type { LightnessCurve } from '../types'
+import type { LightnessCurve } from '../types/theme'
 import { describe, expect, it } from 'vitest'
+import { SHADE_KEYS } from '../types/theme'
 import {
   anchorShadeIndexFromAnchorLightness,
   generatePalette,
   hexToOklch,
   normalizeHex6,
-  oklchToCss,
   oklchToHex,
   oklchToSrgb,
-} from '../palette'
-import { SHADE_KEYS } from '../types'
+} from '../utils/palette'
 
 const DEFAULT_ANCHOR_L = 0.55
 
@@ -120,18 +119,6 @@ describe('anchorShadeIndexFromAnchorLightness', () => {
   it('picks the curve step closest to the target L', () => {
     expect(anchorShadeIndexFromAnchorLightness(0.55)).toBe(5)
     expect(anchorShadeIndexFromAnchorLightness(0.97)).toBe(0)
-  })
-})
-
-describe('oklchToCss', () => {
-  it('formats an oklch color as a CSS string', () => {
-    const css = oklchToCss({ l: 0.55, c: 0.15, h: 230 })
-    expect(css).toBe('oklch(0.55 0.15 230)')
-  })
-
-  it('rounds values to avoid excessive precision', () => {
-    const css = oklchToCss({ l: 0.554321, c: 0.123456, h: 229.999 })
-    expect(css).toBe('oklch(0.5543 0.1235 230)')
   })
 })
 

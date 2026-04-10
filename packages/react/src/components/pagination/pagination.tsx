@@ -1,6 +1,5 @@
-import type { ComponentPropsWithoutRef } from 'react'
+import type { ComponentPropsWithoutRef, ComponentPropsWithRef } from 'react'
 import { Slot } from '@radix-ui/react-slot'
-import { forwardRef } from 'react'
 import { cn } from '../../utils/cn'
 import { buttonVariants } from '../button/button.variants'
 import { paginationContentVariants } from './pagination.variants'
@@ -24,45 +23,41 @@ function Pagination({ className, ...props }: ComponentPropsWithoutRef<'nav'>) {
   )
 }
 
-const PaginationContent = forwardRef<HTMLUListElement, ComponentPropsWithoutRef<'ul'>>(
-  ({ className, ...props }, ref) => (
-    <ul ref={ref} className={cn(paginationContentVariants(), className)} {...props} />
-  ),
-)
+function PaginationContent({ className, ref, ...props }: ComponentPropsWithRef<'ul'>) {
+  return <ul ref={ref} className={cn(paginationContentVariants(), className)} {...props} />
+}
 PaginationContent.displayName = 'PaginationContent'
 
-const PaginationItem = forwardRef<HTMLLIElement, ComponentPropsWithoutRef<'li'>>(
-  ({ className, ...props }, ref) => <li ref={ref} className={cn('', className)} {...props} />,
-)
+function PaginationItem({ className, ref, ...props }: ComponentPropsWithRef<'li'>) {
+  return <li ref={ref} className={cn('', className)} {...props} />
+}
 PaginationItem.displayName = 'PaginationItem'
 
-type PaginationLinkProps = ComponentPropsWithoutRef<'a'> & {
+type PaginationLinkProps = ComponentPropsWithRef<'a'> & {
   isActive?: boolean
   asChild?: boolean
 }
 
-const PaginationLink = forwardRef<HTMLAnchorElement, PaginationLinkProps>(
-  ({ className, isActive, asChild, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'a'
-    return (
-      <Comp
-        ref={ref}
-        aria-current={isActive ? 'page' : undefined}
-        className={cn(
-          buttonVariants({ variant: 'outline', color: 'neutral', size: 'sm' }),
-          'size-9 min-w-9 shrink-0 p-0',
-          isActive && 'border-primary bg-primary-subtle text-primary',
-          className,
-        )}
-        {...props}
-      />
-    )
-  },
-)
+function PaginationLink({ className, isActive, asChild, ref, ...props }: PaginationLinkProps) {
+  const Comp = asChild ? Slot : 'a'
+  return (
+    <Comp
+      ref={ref}
+      aria-current={isActive ? 'page' : undefined}
+      className={cn(
+        buttonVariants({ variant: 'outline', color: 'neutral', size: 'sm' }),
+        'size-9 min-w-9 shrink-0 p-0',
+        isActive && 'border-primary bg-primary-subtle text-primary',
+        className,
+      )}
+      {...props}
+    />
+  )
+}
 PaginationLink.displayName = 'PaginationLink'
 
-const PaginationPrevious = forwardRef<HTMLAnchorElement, ComponentPropsWithoutRef<'a'>>(
-  ({ className, ...props }, ref) => (
+function PaginationPrevious({ className, ref, ...props }: ComponentPropsWithRef<'a'>) {
+  return (
     <PaginationLink
       ref={ref}
       aria-label="Go to previous page"
@@ -72,12 +67,12 @@ const PaginationPrevious = forwardRef<HTMLAnchorElement, ComponentPropsWithoutRe
       <Chevron dir="left" />
       <span className="hidden sm:inline">Previous</span>
     </PaginationLink>
-  ),
-)
+  )
+}
 PaginationPrevious.displayName = 'PaginationPrevious'
 
-const PaginationNext = forwardRef<HTMLAnchorElement, ComponentPropsWithoutRef<'a'>>(
-  ({ className, ...props }, ref) => (
+function PaginationNext({ className, ref, ...props }: ComponentPropsWithRef<'a'>) {
+  return (
     <PaginationLink
       ref={ref}
       aria-label="Go to next page"
@@ -87,8 +82,8 @@ const PaginationNext = forwardRef<HTMLAnchorElement, ComponentPropsWithoutRef<'a
       <span className="hidden sm:inline">Next</span>
       <Chevron dir="right" />
     </PaginationLink>
-  ),
-)
+  )
+}
 PaginationNext.displayName = 'PaginationNext'
 
 function PaginationEllipsis({ className, ...props }: ComponentPropsWithoutRef<'span'>) {
