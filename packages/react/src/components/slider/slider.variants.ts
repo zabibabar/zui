@@ -1,7 +1,10 @@
 import { tv } from 'tailwind-variants'
 
 export const sliderTrackVariants = tv({
-  base: ['relative h-slider-track w-full grow overflow-hidden rounded-slider-track', 'bg-muted'],
+  base: [
+    'relative h-slider-track w-full grow overflow-hidden rounded-slider-track',
+    'bg-muted shadow-inner',
+  ],
 })
 
 export const sliderRangeVariants = tv({
@@ -10,9 +13,10 @@ export const sliderRangeVariants = tv({
 
 export const sliderThumbVariants = tv({
   base: [
-    'block size-slider-thumb rounded-slider-thumb border-2 border-primary bg-background',
-    'shadow-sm transition-[box-shadow] duration-150',
+    'block size-slider-thumb cursor-grab rounded-slider-thumb border-2 border-primary bg-background',
+    'shadow-sm transition-[box-shadow,transform,border-color] duration-150',
+    'hover:scale-105 hover:shadow-md active:cursor-grabbing',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40',
-    'disabled:pointer-events-none disabled:opacity-50',
+    'disabled:cursor-not-allowed disabled:opacity-50',
   ],
 })

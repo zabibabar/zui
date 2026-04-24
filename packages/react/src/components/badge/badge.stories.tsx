@@ -8,7 +8,7 @@ const meta = {
     variant: { control: 'select', options: ['solid', 'soft', 'outline'] },
     color: {
       control: 'select',
-      options: ['primary', 'danger', 'info', 'success', 'warning', 'neutral'],
+      options: ['primary', 'secondary', 'danger', 'info', 'success', 'warning', 'neutral'],
     },
   },
   args: { children: 'Badge' },
@@ -22,11 +22,13 @@ export const Default: Story = {}
 export const AllColors: Story = {
   render: () => (
     <div className="flex flex-wrap gap-2">
-      {(['primary', 'danger', 'info', 'success', 'warning', 'neutral'] as const).map((c) => (
-        <Badge key={c} color={c}>
-          {c}
-        </Badge>
-      ))}
+      {(['primary', 'secondary', 'danger', 'info', 'success', 'warning', 'neutral'] as const).map(
+        (c) => (
+          <Badge key={c} color={c}>
+            {c}
+          </Badge>
+        ),
+      )}
     </div>
   ),
 }

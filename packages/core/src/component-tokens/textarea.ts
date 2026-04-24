@@ -11,7 +11,7 @@ export interface TextareaTokens {
 
 export const defaultTextareaTokens: TextareaTokens = {
   minHeight: 24,
-  paddingX: 3,
+  paddingX: 4,
   paddingY: 2,
   fontSize: 'sm',
   radius: 'md',

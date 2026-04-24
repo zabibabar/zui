@@ -10,7 +10,7 @@ This bundle contains files exported from the ZUI Playground.
 
 ## Files
 
-- \`theme.css\`: your generated semantic theme tokens for both \`[data-theme="light"]\` and \`[data-theme="dark"]\`.
+- \`theme.css\`: your generated semantic theme tokens for both \`[data-theme="light"]\` and \`[data-theme="dark"]\`, plus playground typography overrides.
 - \`tailwind-theme.css\`: Tailwind v4 bridge that maps semantic CSS variables to Tailwind theme tokens/utilities.
 
 ## How to use
@@ -18,6 +18,7 @@ This bundle contains files exported from the ZUI Playground.
 1. Add both files to your app styles.
 2. Ensure your app root has a \`data-theme\` attribute (\`light\` or \`dark\`).
 3. Import \`tailwind-theme.css\` before using theme-based Tailwind utilities.
+4. Import or self-host any non-system fonts selected in the playground before applying the theme.
 
 If you use \`@zui/react\` components with Tailwind v4, add app-local \`@source\`
 entries so Tailwind scans component class usage:

@@ -90,6 +90,7 @@ export { buildFullTheme } from './full-theme'
 export type { FullTheme } from './full-theme'
 export {
   defaultEasing,
+  defaultFontFamily,
   defaultFontWeight,
   defaultLeading,
   defaultMotion,
@@ -100,6 +101,7 @@ export {
   defaultTracking,
   defaultTypography,
   EASING_NAMES,
+  FONT_FAMILY_NAMES,
   FONT_WEIGHT_NAMES,
   LEADING_STEPS,
   MOTION_NAMES,
@@ -115,6 +117,8 @@ export type {
   CubicBezier,
   EasingName,
   EasingScale,
+  FontFamilyName,
+  FontFamilyScale,
   FontWeightName,
   FontWeightScale,
   LeadingScale,

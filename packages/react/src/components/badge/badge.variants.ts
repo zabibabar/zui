@@ -10,6 +10,7 @@ export const badgeVariants = tv({
     },
     color: {
       primary: '',
+      secondary: '',
       danger: '',
       info: '',
       success: '',
@@ -22,6 +23,11 @@ export const badgeVariants = tv({
       variant: 'solid',
       color: 'primary',
       class: 'bg-primary text-primary-foreground',
+    },
+    {
+      variant: 'solid',
+      color: 'secondary',
+      class: 'bg-secondary text-secondary-foreground',
     },
     {
       variant: 'solid',
@@ -55,6 +61,11 @@ export const badgeVariants = tv({
     },
     {
       variant: 'soft',
+      color: 'secondary',
+      class: 'bg-secondary-subtle text-secondary-subtle-foreground',
+    },
+    {
+      variant: 'soft',
       color: 'danger',
       class: 'bg-danger-subtle text-foreground',
     },
@@ -82,6 +93,11 @@ export const badgeVariants = tv({
       variant: 'outline',
       color: 'primary',
       class: 'border border-primary-border text-primary',
+    },
+    {
+      variant: 'outline',
+      color: 'secondary',
+      class: 'border border-secondary-border text-secondary',
     },
     {
       variant: 'outline',

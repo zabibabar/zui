@@ -4,20 +4,22 @@ export const buttonVariants = tv({
   base: [
     'inline-flex items-center justify-center gap-btn-gap',
     'font-btn whitespace-nowrap',
-    'transition-colors duration-150',
+    'transition-[background-color,border-color,color,box-shadow,transform] duration-150',
     'focus-visible:outline-2 focus-visible:outline-offset-2',
-    'disabled:pointer-events-none disabled:opacity-50',
+    'active:translate-y-px',
+    'disabled:cursor-not-allowed disabled:opacity-50 disabled:active:translate-y-0',
     'cursor-pointer',
   ],
   variants: {
     variant: {
-      solid: [],
-      outline: [],
+      solid: 'shadow-sm hover:shadow-md',
+      outline: 'bg-background shadow-xs hover:shadow-sm',
       ghost: [],
       link: ['underline-offset-4', 'hover:underline', 'p-0', 'h-auto'],
     },
     color: {
       primary: 'focus-visible:outline-primary',
+      secondary: 'focus-visible:outline-secondary',
       danger: 'focus-visible:outline-danger',
       info: 'focus-visible:outline-info',
       success: 'focus-visible:outline-success',
@@ -37,6 +39,12 @@ export const buttonVariants = tv({
       variant: 'solid',
       color: 'primary',
       class: 'bg-primary text-primary-foreground hover:bg-primary-hover active:bg-primary-active',
+    },
+    {
+      variant: 'solid',
+      color: 'secondary',
+      class:
+        'bg-secondary text-secondary-foreground hover:bg-secondary-hover active:bg-secondary-active',
     },
     {
       variant: 'solid',
@@ -68,6 +76,12 @@ export const buttonVariants = tv({
       color: 'primary',
       class:
         'border border-primary-border text-primary hover:bg-primary-subtle active:bg-primary-subtle/80',
+    },
+    {
+      variant: 'outline',
+      color: 'secondary',
+      class:
+        'border border-secondary-border text-secondary hover:bg-secondary-subtle active:bg-secondary-subtle/80',
     },
     {
       variant: 'outline',
@@ -105,6 +119,11 @@ export const buttonVariants = tv({
     },
     {
       variant: 'ghost',
+      color: 'secondary',
+      class: 'text-secondary hover:bg-secondary-subtle active:bg-secondary-subtle/80',
+    },
+    {
+      variant: 'ghost',
       color: 'danger',
       class: 'text-danger hover:bg-danger-subtle active:bg-danger-subtle/80',
     },
@@ -129,6 +148,7 @@ export const buttonVariants = tv({
       class: 'text-neutral hover:bg-neutral-subtle active:bg-neutral-subtle/80',
     },
     { variant: 'link', color: 'primary', class: 'text-primary' },
+    { variant: 'link', color: 'secondary', class: 'text-secondary' },
     { variant: 'link', color: 'danger', class: 'text-danger' },
     { variant: 'link', color: 'info', class: 'text-info' },
     { variant: 'link', color: 'success', class: 'text-success' },

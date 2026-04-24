@@ -3,14 +3,14 @@ import { tv } from 'tailwind-variants'
 export const commandRootVariants = tv({
   base: [
     'flex h-full w-full flex-col overflow-hidden rounded-command-root',
-    'bg-popover text-popover-foreground',
+    'border border-border bg-popover text-popover-foreground shadow-xl',
   ],
 })
 
 export const commandInputVariants = tv({
   base: [
     'flex h-command-input w-full border-b border-border bg-transparent px-command-input-x py-command-input-y text-command-input',
-    'text-foreground outline-none',
+    'text-foreground outline-none transition-colors',
     'placeholder:text-muted-foreground',
   ],
 })
@@ -33,6 +33,7 @@ export const commandGroupVariants = tv({
 export const commandItemVariants = tv({
   base: [
     'relative flex cursor-pointer select-none items-center rounded-command-item px-command-item-x py-command-item-y text-command-item outline-none',
+    'transition-colors duration-150 hover:bg-muted/70 hover:text-foreground',
     'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
     'aria-selected:bg-muted aria-selected:text-foreground',
   ],

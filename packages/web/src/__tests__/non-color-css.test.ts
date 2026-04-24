@@ -2,7 +2,7 @@ import type { NonColorTokens } from '@zui/core'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { defaultNonColorTokens } from '@zui/core'
+import { defaultFontFamily, defaultNonColorTokens } from '@zui/core'
 import { describe, expect, it } from 'vitest'
 import { generateTailwindThemeCss, renderNonColorTokensCss } from '../non-color-css'
 
@@ -75,6 +75,19 @@ describe('renderNonColorTokensCss', () => {
     expect(css).toContain('--text-base--line-height: calc(1.5 / 1);')
   })
 
+  // ── Font families ──
+
+  it('emits font family stacks and Tailwind font bridges', () => {
+    expect(css).toContain('--zui-font-sans: ui-sans-serif, system-ui, sans-serif;')
+    expect(css).toContain('--font-sans: var(--zui-font-sans);')
+    expect(css).toContain(
+      '--zui-font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;',
+    )
+    expect(css).toContain('--font-serif: var(--zui-font-serif);')
+    expect(css).toContain('--zui-font-mono:')
+    expect(css).toContain('--font-mono: var(--zui-font-mono);')
+  })
+
   // ── Font weights ──
 
   it('emits all font weight values', () => {
@@ -87,9 +100,12 @@ describe('renderNonColorTokensCss', () => {
   // ── Letter spacing ──
 
   it('emits tracking values in em', () => {
-    expect(css).toContain('--tracking-tighter: -0.05em;')
-    expect(css).toContain('--tracking-normal: 0em;')
-    expect(css).toContain('--tracking-widest: 0.1em;')
+    expect(css).toContain('--zui-tracking-tighter: -0.05em;')
+    expect(css).toContain('--tracking-tighter: var(--zui-tracking-tighter);')
+    expect(css).toContain('--zui-tracking-normal: 0em;')
+    expect(css).toContain('--tracking-normal: var(--zui-tracking-normal);')
+    expect(css).toContain('--zui-tracking-widest: 0.1em;')
+    expect(css).toContain('--tracking-widest: var(--zui-tracking-widest);')
   })
 
   // ── Line height ──
@@ -160,6 +176,7 @@ describe('renderNonColorTokensCss', () => {
     expect(css).toContain('/* ── Spacing ── */')
     expect(css).toContain('/* ── Radius scale')
     expect(css).toContain('/* ── Typography scale')
+    expect(css).toContain('/* ── Font families ── */')
     expect(css).toContain('/* ── Font weights ── */')
     expect(css).toContain('/* ── Letter spacing ── */')
     expect(css).toContain('/* ── Line height ── */')
@@ -200,6 +217,28 @@ describe('renderNonColorTokensCss with custom tokens', () => {
     expect(css).toContain('density-dampened at 75% rate')
     expect(css).toContain('* 0.75)')
   })
+
+  it('respects custom font family stacks', () => {
+    const custom: NonColorTokens = {
+      ...defaultNonColorTokens,
+      fontFamily: {
+        ...defaultFontFamily,
+        sans: 'Inter, ui-sans-serif, system-ui, sans-serif',
+      },
+    }
+    const css = renderNonColorTokensCss(custom)
+    expect(css).toContain('--zui-font-sans: Inter, ui-sans-serif, system-ui, sans-serif;')
+  })
+
+  it('applies a custom tracking offset to the tracking scale', () => {
+    const custom: NonColorTokens = {
+      ...defaultNonColorTokens,
+      trackingOffsetEm: 0.01,
+    }
+    const css = renderNonColorTokensCss(custom)
+    expect(css).toContain('--zui-tracking-tight: -0.015em;')
+    expect(css).toContain('--zui-tracking-normal: 0.01em;')
+  })
 })
 
 describe('equivalence with tailwind-theme.css', () => {
@@ -211,8 +250,9 @@ describe('equivalence with tailwind-theme.css', () => {
       1 + // spacing
       8 + // radius
       7 * 2 + // typography (size + line-height)
+      3 * 2 + // font families (backing vars + Tailwind bridges)
       9 + // font weights
-      6 + // tracking
+      6 * 2 + // tracking (backing vars + Tailwind bridges)
       5 + // leading
       7 + // shadows
       3 + // easing
@@ -246,6 +286,8 @@ describe('generateTailwindThemeCss', () => {
   it('includes color bridge mappings', () => {
     expect(css).toContain('--color-background: var(--background);')
     expect(css).toContain('--color-primary: var(--primary);')
+    expect(css).toContain('--color-secondary: var(--secondary);')
+    expect(css).toContain('--color-secondary-foreground: var(--secondary-foreground);')
     expect(css).toContain('--color-danger-foreground: var(--danger-foreground);')
     expect(css).toContain('--color-warning-border: var(--warning-border);')
   })
@@ -254,6 +296,7 @@ describe('generateTailwindThemeCss', () => {
     expect(css).toContain('  --spacing: calc(0.25rem')
     expect(css).toContain('  --radius-xs:')
     expect(css).toContain('  --text-xs:')
+    expect(css).toContain('  --font-sans: var(--zui-font-sans);')
     expect(css).toContain('  --font-weight-bold: 700;')
     expect(css).toContain('  --shadow-md:')
     expect(css).toContain('  --ease-in:')

@@ -11,7 +11,7 @@ const meta = {
     },
     color: {
       control: 'select',
-      options: ['primary', 'danger', 'info', 'success', 'warning', 'neutral'],
+      options: ['primary', 'secondary', 'danger', 'info', 'success', 'warning', 'neutral'],
     },
     size: {
       control: 'select',
@@ -49,6 +49,10 @@ export const Danger: Story = {
   args: { color: 'danger' },
 }
 
+export const Secondary: Story = {
+  args: { color: 'secondary' },
+}
+
 export const Info: Story = {
   args: { color: 'info' },
 }
@@ -70,7 +74,7 @@ export const Disabled: Story = {
 }
 
 const VARIANTS = ['solid', 'outline', 'ghost', 'link'] as const
-const COLORS = ['primary', 'danger', 'info', 'success', 'warning', 'neutral'] as const
+const COLORS = ['primary', 'secondary', 'danger', 'info', 'success', 'warning', 'neutral'] as const
 const SIZES = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 
 export const AllVariantsByColor: Story = {

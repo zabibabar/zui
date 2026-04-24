@@ -48,6 +48,13 @@
   --color-primary-subtle: var(--primary-subtle);
   --color-primary-subtle-foreground: var(--primary-subtle-foreground);
   --color-primary-border: var(--primary-border);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-active: var(--secondary-active);
+  --color-secondary-subtle: var(--secondary-subtle);
+  --color-secondary-subtle-foreground: var(--secondary-subtle-foreground);
+  --color-secondary-border: var(--secondary-border);
   --color-danger: var(--danger);
   --color-danger-foreground: var(--danger-foreground);
   --color-danger-hover: var(--danger-hover);
@@ -106,6 +113,14 @@
   --text-3xl: calc(1.875rem * (1 + (var(--density, 1) - 1) * 0.5));
   --text-3xl--line-height: calc(2.25 / 1.875);
 
+  /* ── Font families ── */
+  --zui-font-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--zui-font-sans);
+  --zui-font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-serif: var(--zui-font-serif);
+  --zui-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-mono: var(--zui-font-mono);
+
   /* ── Font weights ── */
   --font-weight-thin: 100;
   --font-weight-extralight: 200;
@@ -118,12 +133,18 @@
   --font-weight-black: 900;
 
   /* ── Letter spacing ── */
-  --tracking-tighter: -0.05em;
-  --tracking-tight: -0.025em;
-  --tracking-normal: 0em;
-  --tracking-wide: 0.025em;
-  --tracking-wider: 0.05em;
-  --tracking-widest: 0.1em;
+  --zui-tracking-tighter: -0.05em;
+  --tracking-tighter: var(--zui-tracking-tighter);
+  --zui-tracking-tight: -0.025em;
+  --tracking-tight: var(--zui-tracking-tight);
+  --zui-tracking-normal: 0em;
+  --tracking-normal: var(--zui-tracking-normal);
+  --zui-tracking-wide: 0.025em;
+  --tracking-wide: var(--zui-tracking-wide);
+  --zui-tracking-wider: 0.05em;
+  --tracking-wider: var(--zui-tracking-wider);
+  --zui-tracking-widest: 0.1em;
+  --tracking-widest: var(--zui-tracking-widest);
 
   /* ── Line height ── */
   --leading-tight: 1.25;
@@ -173,6 +194,7 @@
   }
 
   /* ── Accordion ── */
+  --spacing-accordion-trigger-x: calc(var(--spacing) * 3);
   --spacing-accordion-trigger-y: calc(var(--spacing) * 4);
   --font-size-accordion-trigger: var(--text-sm);
   --font-weight-accordion-trigger: var(--font-weight-medium);
@@ -260,7 +282,7 @@
   --spacing-command-group-heading-y: calc(var(--spacing) * 1.5);
   --font-size-command-group-heading: var(--text-xs);
   --font-weight-command-group-heading: var(--font-weight-medium);
-  --spacing-command-item-x: calc(var(--spacing) * 2);
+  --spacing-command-item-x: calc(var(--spacing) * 3);
   --spacing-command-item-y: calc(var(--spacing) * 1.5);
   --font-size-command-item: var(--text-sm);
   --radius-command-item: var(--radius-sm);
@@ -272,7 +294,7 @@
   --spacing-context-menu-content: calc(var(--spacing) * 1);
   --shadow-context-menu-content: var(--shadow-xl);
   --radius-context-menu-content: var(--radius-md);
-  --spacing-context-menu-item-x: calc(var(--spacing) * 2);
+  --spacing-context-menu-item-x: calc(var(--spacing) * 3);
   --spacing-context-menu-item-y: calc(var(--spacing) * 1.5);
   --font-size-context-menu-item: var(--text-sm);
   --radius-context-menu-item: var(--radius-sm);
@@ -311,7 +333,7 @@
   --spacing-dropdown-menu-content: calc(var(--spacing) * 1);
   --shadow-dropdown-menu-content: var(--shadow-xl);
   --radius-dropdown-menu-content: var(--radius-md);
-  --spacing-dropdown-menu-item-x: calc(var(--spacing) * 2);
+  --spacing-dropdown-menu-item-x: calc(var(--spacing) * 3);
   --spacing-dropdown-menu-item-y: calc(var(--spacing) * 1.5);
   --font-size-dropdown-menu-item: var(--text-sm);
   --radius-dropdown-menu-item: var(--radius-sm);
@@ -324,7 +346,7 @@
 
   /* ── Input ── */
   --spacing-input-field: calc(var(--spacing) * 9);
-  --spacing-input-field-x: calc(var(--spacing) * 3);
+  --spacing-input-field-x: calc(var(--spacing) * 4);
   --spacing-input-field-y: calc(var(--spacing) * 2);
   --font-size-input-field: var(--text-sm);
   --radius-input-field: var(--radius-md);
@@ -348,7 +370,7 @@
   --spacing-menubar-menu-content: calc(var(--spacing) * 1);
   --shadow-menubar-menu-content: var(--shadow-xl);
   --radius-menubar-menu-content: var(--radius-md);
-  --spacing-menubar-menu-item-x: calc(var(--spacing) * 2);
+  --spacing-menubar-menu-item-x: calc(var(--spacing) * 3);
   --spacing-menubar-menu-item-y: calc(var(--spacing) * 1.5);
   --font-size-menubar-menu-item: var(--text-sm);
   --radius-menubar-menu-item: var(--radius-sm);
@@ -382,7 +404,7 @@
 
   /* ── Select ── */
   --spacing-select-trigger: calc(var(--spacing) * 9);
-  --spacing-select-trigger-x: calc(var(--spacing) * 3);
+  --spacing-select-trigger-x: calc(var(--spacing) * 4);
   --spacing-select-trigger-y: calc(var(--spacing) * 2);
   --spacing-select-trigger-gap: calc(var(--spacing) * 2);
   --font-size-select-trigger: var(--text-sm);
@@ -457,7 +479,7 @@
 
   /* ── Textarea ── */
   --spacing-textarea: calc(var(--spacing) * 24);
-  --spacing-textarea-x: calc(var(--spacing) * 3);
+  --spacing-textarea-x: calc(var(--spacing) * 4);
   --spacing-textarea-y: calc(var(--spacing) * 2);
   --font-size-textarea: var(--text-sm);
   --radius-textarea: var(--radius-md);

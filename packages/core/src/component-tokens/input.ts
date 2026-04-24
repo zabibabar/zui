@@ -11,7 +11,7 @@ export interface InputTokens {
 
 export const defaultInputTokens: InputTokens = {
   minHeight: 9,
-  paddingX: 3,
+  paddingX: 4,
   paddingY: 2,
   fontSize: 'sm',
   radius: 'md',

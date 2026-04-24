@@ -1,17 +1,40 @@
-import type { ChromeConfig, ColorSeed, InkConfig, SurfaceConfig } from '@zui/core'
+import type { ChromeConfig, ColorSeed, FontFamilyScale, InkConfig, SurfaceConfig } from '@zui/core'
 import { presets } from '@zui/core'
+import { DEFAULT_PLAYGROUND_FONTS } from './font-options'
 
-export const COLOR_INTENTS = ['primary', 'neutral', 'danger', 'info', 'success', 'warning'] as const
+export const REQUIRED_COLOR_INTENTS = [
+  'primary',
+  'neutral',
+  'danger',
+  'info',
+  'success',
+  'warning',
+] as const
 
+export const COLOR_INTENTS = [
+  'primary',
+  'secondary',
+  'neutral',
+  'danger',
+  'info',
+  'success',
+  'warning',
+] as const
+
+export type RequiredColorIntent = (typeof REQUIRED_COLOR_INTENTS)[number]
 export type ColorIntent = (typeof COLOR_INTENTS)[number]
+export type ThemeSeeds = Record<RequiredColorIntent, ColorSeed> &
+  Partial<Record<'secondary', ColorSeed>>
 
 export interface PlaygroundThemeState {
-  readonly seeds: Record<ColorIntent, ColorSeed>
+  readonly seeds: ThemeSeeds
   readonly ink: InkConfig
   readonly surfaces: SurfaceConfig
   readonly chrome: ChromeConfig
   readonly density: string
   readonly radius: string
+  readonly fonts: FontFamilyScale
+  readonly trackingOffsetEm: number
 }
 
 /** Partial update applied on top of a full {@link PlaygroundThemeState}. */
@@ -22,6 +45,8 @@ export interface PlaygroundThemePatch {
   readonly chrome?: ChromeConfig
   readonly density?: string
   readonly radius?: string
+  readonly fonts?: Partial<FontFamilyScale>
+  readonly trackingOffsetEm?: number
 }
 
 /**
@@ -43,6 +68,8 @@ export function defaultPlaygroundThemeState(): PlaygroundThemeState {
     chrome: {},
     density: '1',
     radius: '0.625rem',
+    fonts: DEFAULT_PLAYGROUND_FONTS,
+    trackingOffsetEm: 0,
   }
 }
 
@@ -67,6 +94,8 @@ export function mergePlaygroundPreset(
 
   const chrome = patch.chrome !== undefined ? { ...base.chrome, ...patch.chrome } : base.chrome
 
+  const fonts = patch.fonts !== undefined ? { ...base.fonts, ...patch.fonts } : base.fonts
+
   return {
     seeds,
     ink,
@@ -74,5 +103,7 @@ export function mergePlaygroundPreset(
     chrome,
     density: patch.density ?? base.density,
     radius: patch.radius ?? base.radius,
+    fonts,
+    trackingOffsetEm: patch.trackingOffsetEm ?? base.trackingOffsetEm,
   }
 }

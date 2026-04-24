@@ -9,8 +9,10 @@ import type {
 } from '@zui/core'
 import {
   defaultComponentTokens,
+  defaultFontFamily,
   defaultNonColorTokens,
   EASING_NAMES,
+  FONT_FAMILY_NAMES,
   FONT_WEIGHT_NAMES,
   LEADING_STEPS,
   MOTION_NAMES,
@@ -46,6 +48,11 @@ function motionEasingCss(easing: MotionDefinition['easing']): string {
 
 function durationCss(ms: number): string {
   return `${ms / 1000}s`
+}
+
+function em(value: number): string {
+  const rounded = Number(value.toFixed(4))
+  return `${Object.is(rounded, -0) ? 0 : rounded}em`
 }
 
 function shadowLayerCss(layer: ShadowLayer): string {
@@ -102,10 +109,22 @@ function renderFontWeights(tokens: NonColorTokens): string[] {
   return lines
 }
 
+function renderFontFamilies(tokens: NonColorTokens): string[] {
+  const fontFamily = tokens.fontFamily ?? defaultFontFamily
+  const lines: string[] = ['/* ── Font families ── */']
+  for (const name of FONT_FAMILY_NAMES) {
+    lines.push(`--zui-font-${name}: ${fontFamily[name]};`)
+    lines.push(`--font-${name}: var(--zui-font-${name});`)
+  }
+  return lines
+}
+
 function renderTracking(tokens: NonColorTokens): string[] {
+  const offset = tokens.trackingOffsetEm ?? 0
   const lines: string[] = ['/* ── Letter spacing ── */']
   for (const step of TRACKING_STEPS) {
-    lines.push(`--tracking-${step}: ${tokens.tracking[step]}em;`)
+    lines.push(`--zui-tracking-${step}: ${em(tokens.tracking[step] + offset)};`)
+    lines.push(`--tracking-${step}: var(--zui-tracking-${step});`)
   }
   return lines
 }
@@ -196,6 +215,7 @@ export function renderNonColorTokensCss(tokens: NonColorTokens = defaultNonColor
     renderSpacing(tokens),
     renderRadius(tokens),
     renderTypography(tokens),
+    renderFontFamilies(tokens),
     renderFontWeights(tokens),
     renderTracking(tokens),
     renderLeading(tokens),
@@ -251,6 +271,13 @@ const COLOR_BRIDGES = `\
   --color-primary-subtle: var(--primary-subtle);
   --color-primary-subtle-foreground: var(--primary-subtle-foreground);
   --color-primary-border: var(--primary-border);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-active: var(--secondary-active);
+  --color-secondary-subtle: var(--secondary-subtle);
+  --color-secondary-subtle-foreground: var(--secondary-subtle-foreground);
+  --color-secondary-border: var(--secondary-border);
   --color-danger: var(--danger);
   --color-danger-foreground: var(--danger-foreground);
   --color-danger-hover: var(--danger-hover);

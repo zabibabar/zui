@@ -26,7 +26,7 @@ export interface SelectTokens {
 export const defaultSelectTokens: SelectTokens = {
   trigger: {
     minHeight: 9,
-    paddingX: 3,
+    paddingX: 4,
     paddingY: 2,
     gap: 2,
     fontSize: 'sm',

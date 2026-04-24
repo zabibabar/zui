@@ -1,0 +1,8 @@
+@import '@zui/web/tailwind-theme.css';
+
+/*
+ * Showcase-owned scan paths for @zui/react classes.
+ * Keep these local so @zui/web stays dependency-direction clean.
+ */
+@source '../../../packages/react/src';
+@source '../../../node_modules/@zui/react/src';

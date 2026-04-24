@@ -349,6 +349,32 @@ describe('generateTheme', () => {
     expect(theme.primitives.danger['500'].oklch.h).toBe(25)
   })
 
+  it('defaults secondary to the primary palette when omitted', () => {
+    const minimal = {
+      primary: makePalette(230, 0.15),
+      neutral: makePalette(215, 0.02),
+    }
+    const theme = generateTheme(minimal, 'light')
+
+    expect(theme.primitives.secondary).toBe(theme.primitives.primary)
+    expect(theme.semantic.secondary).toEqual(theme.semantic.primary)
+  })
+
+  it('does not replace an explicit secondary palette', () => {
+    const secondary = makePalette(280, 0.16)
+    const theme = generateTheme(
+      {
+        primary: makePalette(230, 0.15),
+        secondary,
+        neutral: makePalette(215, 0.02),
+      },
+      'light',
+    )
+
+    expect(theme.primitives.secondary).toBe(secondary)
+    expect(theme.semantic.secondary.base.h).toBe(280)
+  })
+
   it('does not replace explicit optional intent palettes', () => {
     const customDanger = makePalette(100, 0.12)
     const theme = generateTheme(

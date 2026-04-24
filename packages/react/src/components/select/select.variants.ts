@@ -1,5 +1,6 @@
 import { tv } from 'tailwind-variants'
 import {
+  fieldControlBase,
   overlayInteractiveItemBase,
   overlayLabelBase,
   overlaySeparatorBase,
@@ -10,16 +11,17 @@ export const selectTriggerVariants = tv({
   base: [
     'flex min-h-select-trigger w-full items-center justify-between gap-select-trigger-gap rounded-select-trigger border border-input bg-background',
     'px-select-trigger-x py-select-trigger-y text-select-trigger text-foreground',
-    'placeholder:text-muted-foreground',
-    'transition-[color,box-shadow,border-color] duration-150',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30',
-    'disabled:cursor-not-allowed disabled:opacity-50',
+    'cursor-pointer hover:bg-muted/30 data-[placeholder]:text-muted-foreground data-[state=open]:border-ring data-[state=open]:ring-2 data-[state=open]:ring-ring/20',
+    ...fieldControlBase,
     '[&_svg]:size-select-trigger-icon [&_svg]:text-muted-foreground',
   ],
 })
 
 export const selectContentVariants = tv({
-  base: ['relative z-50 min-w-[8rem] overflow-hidden rounded-md shadow-xl', ...overlaySurfaceBase],
+  base: [
+    'relative z-50 min-w-[8rem] overflow-hidden rounded-md shadow-xl ring-1 ring-foreground/5',
+    ...overlaySurfaceBase,
+  ],
 })
 
 export const selectViewportVariants = tv({

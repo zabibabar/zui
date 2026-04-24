@@ -47,7 +47,8 @@ function PaginationLink({ className, isActive, asChild, ref, ...props }: Paginat
       className={cn(
         buttonVariants({ variant: 'outline', color: 'neutral', size: 'sm' }),
         'size-9 min-w-9 shrink-0 p-0',
-        isActive && 'border-primary bg-primary-subtle text-primary',
+        isActive &&
+          'border-primary bg-primary-subtle text-primary shadow-sm hover:bg-primary-subtle',
         className,
       )}
       {...props}

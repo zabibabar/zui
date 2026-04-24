@@ -4,6 +4,7 @@
     { "path": "packages/core" },
     { "path": "packages/web" },
     { "path": "packages/react" },
-    { "path": "apps/playground" }
+    { "path": "apps/playground" },
+    { "path": "apps/showcase" }
   ]
 }

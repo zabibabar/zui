@@ -18,13 +18,13 @@ export const sidebarSectionTitleVariants = tv({
 
 export const sidebarNavItemVariants = tv({
   base: [
-    'w-full rounded-sidebar-nav-item px-sidebar-nav-item-x py-sidebar-nav-item-y text-left text-sidebar-nav-item transition-colors',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+    'w-full cursor-pointer select-none rounded-sidebar-nav-item px-sidebar-nav-item-x py-sidebar-nav-item-y text-left text-sidebar-nav-item transition-[background-color,color,box-shadow] duration-150',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40',
   ],
   variants: {
     active: {
-      true: 'bg-muted font-medium text-foreground',
-      false: 'text-muted-foreground hover:bg-muted/60 hover:text-foreground',
+      true: 'bg-muted font-medium text-foreground shadow-sm',
+      false: 'text-muted-foreground hover:bg-muted/70 hover:text-foreground',
     },
   },
   defaultVariants: {

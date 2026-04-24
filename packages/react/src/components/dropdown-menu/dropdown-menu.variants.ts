@@ -8,7 +8,7 @@ import {
 
 export const dropdownMenuContentVariants = tv({
   base: [
-    'z-50 min-w-dropdown-menu-content overflow-hidden rounded-dropdown-menu-content p-dropdown-menu-content shadow-dropdown-menu-content',
+    'z-50 min-w-dropdown-menu-content overflow-hidden rounded-dropdown-menu-content p-dropdown-menu-content shadow-dropdown-menu-content ring-1 ring-foreground/5',
     ...overlaySurfaceBase,
   ],
 })

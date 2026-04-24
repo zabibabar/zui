@@ -9,7 +9,7 @@ export const breadcrumbListVariants = tv({
 
 export const breadcrumbLinkVariants = tv({
   base: [
-    'transition-colors hover:text-foreground',
+    'cursor-pointer rounded-sm transition-colors hover:text-foreground hover:underline hover:underline-offset-4',
     'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring',
   ],
 })

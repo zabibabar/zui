@@ -1,4 +1,4 @@
-import type { OklchColor } from '@zui/core'
+import type { ColorSeed, FontFamilyName, OklchColor } from '@zui/core'
 import type { ColorIntent, PlaygroundThemeState } from './theme-state'
 import {
   assignForegrounds,
@@ -24,6 +24,7 @@ import {
   Typography,
 } from '@zui/react'
 import { useMemo, useState } from 'react'
+import { fontOptionsForName } from './font-options'
 import { colorSeedFromHex, colorSeedToHex } from './playground-color'
 import { PLAYGROUND_PRESET_DEFINITIONS } from './preset-themes'
 import { COLOR_INTENTS } from './theme-state'
@@ -45,6 +46,7 @@ const SIDEBAR_SECTIONS: { id: string; label: string; keywords: string }[] = [
 
 function matchesQuery(query: string, section: { label: string; keywords: string }) {
   if (!query.trim()) return true
+
   const q = query.toLowerCase()
   return section.label.toLowerCase().includes(q) || section.keywords.toLowerCase().includes(q)
 }
@@ -140,6 +142,49 @@ function fieldClass() {
   return 'rounded border border-border bg-background px-2 py-1.5 text-sm text-foreground'
 }
 
+function formatTrackingOffset(value: number) {
+  const rounded = Number(value.toFixed(3))
+  return `${rounded > 0 ? '+' : ''}${Object.is(rounded, -0) ? 0 : rounded}em`
+}
+
+function fontLabel(name: FontFamilyName) {
+  switch (name) {
+    case 'sans':
+      return 'Sans'
+    case 'serif':
+      return 'Serif'
+    case 'mono':
+      return 'Monospace'
+  }
+}
+
+function FontStackSelect({
+  name,
+  value,
+  onChange,
+}: {
+  name: FontFamilyName
+  value: string
+  onChange: (next: string) => void
+}) {
+  const options = fontOptionsForName(name)
+  const hasSelectedOption = options.some((option) => option.stack === value)
+
+  return (
+    <label className="grid gap-1 text-sm">
+      <span className="text-muted-foreground">{fontLabel(name)}</span>
+      <select value={value} onChange={(e) => onChange(e.target.value)} className={fieldClass()}>
+        {!hasSelectedOption && <option value={value}>Custom</option>}
+        {options.map((option) => (
+          <option key={option.id} value={option.stack}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </label>
+  )
+}
+
 export interface PlaygroundThemeSidebarProps {
   state: PlaygroundThemeState
   onChange: (next: PlaygroundThemeState) => void
@@ -173,11 +218,17 @@ export function PlaygroundThemeSidebar({
     return resolveChrome(surfaces, 'light', primaryPal, state.chrome)
   }, [state.seeds.primary, state.surfaces, state.ink, state.chrome])
 
-  const setSeed = (intent: ColorIntent, seed: (typeof presets)[keyof typeof presets]) => {
+  const setSeed = (intent: ColorIntent, seed: ColorSeed) => {
     onChange({
       ...state,
       seeds: { ...state.seeds, [intent]: { ...seed } },
     })
+  }
+
+  const clearSecondarySeed = () => {
+    const seeds = { ...state.seeds }
+    delete seeds.secondary
+    onChange({ ...state, seeds })
   }
 
   const setInkField = (key: 'dark' | 'light', color: OklchColor) => {
@@ -231,6 +282,17 @@ export function PlaygroundThemeSidebar({
     onChange({ ...state, chrome: {} })
   }
 
+  const setFontStack = (name: FontFamilyName, stack: string) => {
+    onChange({
+      ...state,
+      fonts: { ...state.fonts, [name]: stack },
+    })
+  }
+
+  const setTrackingOffset = (trackingOffsetEm: number) => {
+    onChange({ ...state, trackingOffsetEm })
+  }
+
   const showIntent = (id: string) =>
     COLOR_INTENTS.includes(id as ColorIntent) && filteredSections.some((s) => s.id === id)
 
@@ -277,13 +339,30 @@ export function PlaygroundThemeSidebar({
             <Accordion type="single" collapsible defaultValue="primary" className="space-y-1">
               {COLOR_INTENTS.map((intent) => {
                 if (!showIntent(intent)) return null
-                const seed = state.seeds[intent]
+
+                const seed = state.seeds[intent] ?? state.seeds.primary
                 return (
                   <AccordionItem key={intent} value={intent}>
                     <AccordionTrigger className="py-2 text-sm">
                       {intent.charAt(0).toUpperCase() + intent.slice(1)}
                     </AccordionTrigger>
                     <AccordionContent className="space-y-3 pb-3">
+                      {intent === 'secondary' && (
+                        <div className="flex items-start justify-between gap-3">
+                          <Typography variant="caption" tone="muted">
+                            Optional accent color. Defaults to primary when unset.
+                          </Typography>
+                          {state.seeds.secondary && (
+                            <button
+                              type="button"
+                              onClick={clearSecondarySeed}
+                              className="shrink-0 text-xs text-muted-foreground underline"
+                            >
+                              Default to primary
+                            </button>
+                          )}
+                        </div>
+                      )}
                       <label className="grid gap-1 text-xs">
                         <span className="text-muted-foreground">Curve preset</span>
                         <select
@@ -468,6 +547,54 @@ export function PlaygroundThemeSidebar({
           className="min-h-0 flex-1 overflow-auto p-3 data-[state=inactive]:hidden"
         >
           <div className="space-y-4">
+            <div className="space-y-3 rounded border border-border p-3">
+              <div className="space-y-1">
+                <Typography variant="body2" weight="medium">
+                  Typography
+                </Typography>
+                <Typography variant="caption" tone="muted">
+                  Named web fonts need to be installed locally or loaded by the app.
+                </Typography>
+              </div>
+
+              <FontStackSelect
+                name="sans"
+                value={state.fonts.sans}
+                onChange={(next) => setFontStack('sans', next)}
+              />
+              <FontStackSelect
+                name="serif"
+                value={state.fonts.serif}
+                onChange={(next) => setFontStack('serif', next)}
+              />
+              <FontStackSelect
+                name="mono"
+                value={state.fonts.mono}
+                onChange={(next) => setFontStack('mono', next)}
+              />
+
+              <div className="space-y-1 rounded bg-muted/40 p-2 text-sm">
+                <div className="font-sans">The quick brown fox jumps over the lazy dog.</div>
+                <div className="font-serif">The quick brown fox jumps over the lazy dog.</div>
+                <div className="font-mono text-xs">const theme = 'zui'</div>
+              </div>
+
+              <label className="grid gap-1 text-sm">
+                <span className="text-muted-foreground">
+                  Letter spacing ({formatTrackingOffset(state.trackingOffsetEm)})
+                </span>
+                <input
+                  type="range"
+                  min={-0.05}
+                  max={0.05}
+                  step={0.005}
+                  value={state.trackingOffsetEm}
+                  onChange={(e) => setTrackingOffset(Number.parseFloat(e.target.value))}
+                  className="w-full"
+                />
+              </label>
+            </div>
+
             <label className="grid gap-1 text-sm">
               <span className="text-muted-foreground">Density</span>
               <select

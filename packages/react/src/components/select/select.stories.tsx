@@ -41,3 +41,17 @@ export const Default: Story = {
     </Select>
   ),
 }
+
+export const Disabled: Story = {
+  render: () => (
+    <Select disabled defaultValue="react">
+      <SelectTrigger className="w-[240px]">
+        <SelectValue placeholder="Select framework" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="react">React</SelectItem>
+        <SelectItem value="vue">Vue</SelectItem>
+      </SelectContent>
+    </Select>
+  ),
+}

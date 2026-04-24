@@ -8,7 +8,7 @@ import {
 
 export const contextMenuContentVariants = tv({
   base: [
-    'z-50 min-w-context-menu-content overflow-hidden rounded-context-menu-content p-context-menu-content shadow-context-menu-content',
+    'z-50 min-w-context-menu-content overflow-hidden rounded-context-menu-content p-context-menu-content shadow-context-menu-content ring-1 ring-foreground/5',
     ...overlaySurfaceBase,
   ],
 })

@@ -36,7 +36,7 @@ export interface OverlayMenuTokens {
 
 export const defaultOverlayMenuTokens: OverlayMenuTokens = {
   content: { minWidthRem: 10, padding: 1, shadow: 'xl', radius: 'md' },
-  item: { paddingX: 2, paddingY: 1.5, fontSize: 'sm', radius: 'sm' },
+  item: { paddingX: 3, paddingY: 1.5, fontSize: 'sm', radius: 'sm' },
   label: { paddingX: 2, paddingY: 1.5, fontSize: 'xs', fontWeight: 'semibold' },
   shortcut: { fontSize: 'xs', tracking: 'widest' },
 }

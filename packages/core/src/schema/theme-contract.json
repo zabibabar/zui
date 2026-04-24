@@ -16,10 +16,11 @@
     },
     "colors": {
       "type": "object",
-      "description": "Color seeds for each intent. Each seed is { hue, chroma, anchorLightness }. Only primary and neutral are required.",
+      "description": "Color seeds for each intent. Each seed is { hue, chroma, anchorLightness }. Only primary and neutral are required; secondary is optional and inherits primary when omitted.",
       "required": ["primary", "neutral"],
       "properties": {
         "primary": { "$ref": "#/$defs/colorSeed" },
+        "secondary": { "$ref": "#/$defs/colorSeed" },
         "neutral": { "$ref": "#/$defs/colorSeed" },
         "danger": { "$ref": "#/$defs/colorSeed" },
         "info": { "$ref": "#/$defs/colorSeed" },

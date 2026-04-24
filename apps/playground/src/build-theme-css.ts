@@ -1,5 +1,12 @@
 import type { PlaygroundThemeState } from './theme-state'
-import { assignForegrounds, generatePalette, generateTheme, resolveInk } from '@zui/core'
+import {
+  assignForegrounds,
+  defaultTracking,
+  generatePalette,
+  generateTheme,
+  resolveInk,
+  TRACKING_STEPS,
+} from '@zui/core'
 import { themesToCss } from '@zui/web'
 import { COLOR_INTENTS } from './theme-state'
 
@@ -7,6 +14,27 @@ export type PlaygroundAppearance = 'light' | 'dark'
 
 function hasDefinedValues(obj: object): boolean {
   return Object.values(obj).some((v) => v !== undefined)
+}
+
+function em(value: number): string {
+  const rounded = Number(value.toFixed(4))
+  return `${Object.is(rounded, -0) ? 0 : rounded}em`
+}
+
+function buildTypographyOverridesCss(state: PlaygroundThemeState): string {
+  const lines = [
+    ':root {',
+    `  --zui-font-sans: ${state.fonts.sans};`,
+    `  --zui-font-serif: ${state.fonts.serif};`,
+    `  --zui-font-mono: ${state.fonts.mono};`,
+  ]
+
+  for (const step of TRACKING_STEPS) {
+    lines.push(`  --zui-tracking-${step}: ${em(defaultTracking[step] + state.trackingOffsetEm)};`)
+  }
+
+  lines.push('}')
+  return lines.join('\n')
 }
 
 /**
@@ -23,10 +51,11 @@ export function buildThemeCss(state: PlaygroundThemeState): string {
 
   const palettes: Record<string, ReturnType<typeof assignForegrounds>> = {}
   for (const name of COLOR_INTENTS) {
-    palettes[name] = assignForegrounds(generatePalette(state.seeds[name]), inkColors)
+    const seed = state.seeds[name]
+    if (seed) palettes[name] = assignForegrounds(generatePalette(seed), inkColors)
   }
 
   const light = generateTheme(palettes, 'light', opts)
   const dark = generateTheme(palettes, 'dark', opts)
-  return themesToCss([light, dark])
+  return `${buildTypographyOverridesCss(state)}\n\n${themesToCss([light, dark])}`
 }

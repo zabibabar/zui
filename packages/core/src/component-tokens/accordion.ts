@@ -2,6 +2,7 @@ import type { FontWeightName, TypeScaleStep } from '../primitives/non-color'
 
 export interface AccordionTokens {
   readonly trigger: {
+    readonly paddingX: number
     readonly paddingY: number
     readonly fontSize: TypeScaleStep
     readonly fontWeight: FontWeightName
@@ -13,6 +14,6 @@ export interface AccordionTokens {
 }
 
 export const defaultAccordionTokens: AccordionTokens = {
-  trigger: { paddingY: 4, fontSize: 'sm', fontWeight: 'medium', iconSize: 4 },
+  trigger: { paddingX: 3, paddingY: 4, fontSize: 'sm', fontWeight: 'medium', iconSize: 4 },
   content: { fontSize: 'sm' },
 }

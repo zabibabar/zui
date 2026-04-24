@@ -1,4 +1,5 @@
 import { tv } from 'tailwind-variants'
+import { fieldControlBase } from '../../styles/overlay-classes'
 
 export const inputVariants = tv({
   base: [
@@ -6,8 +7,7 @@ export const inputVariants = tv({
     'bg-background px-input-field-x py-input-field-y',
     'text-input-field text-foreground',
     'placeholder:text-muted-foreground',
-    'transition-[color,box-shadow] duration-150',
-    'focus-visible:border-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30',
-    'disabled:cursor-not-allowed disabled:opacity-50',
+    'hover:bg-muted/20',
+    ...fieldControlBase,
   ],
 })

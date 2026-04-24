@@ -241,7 +241,10 @@ function mergeOptionalIntentPalettes(
   palettes: Record<string, Palette>,
   ink: InkColors,
 ): Record<string, Palette> {
-  const merged: Record<string, Palette> = { ...palettes }
+  const merged: Record<string, Palette> = {
+    ...palettes,
+    secondary: palettes.secondary ?? palettes.primary,
+  }
   for (const [name, seed] of Object.entries(DEFAULT_OPTIONAL_INTENT_SEEDS) as [
     keyof typeof DEFAULT_OPTIONAL_INTENT_SEEDS,
     ColorSeed,

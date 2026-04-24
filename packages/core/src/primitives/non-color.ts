@@ -88,6 +88,15 @@ export const FONT_WEIGHT_NAMES: readonly FontWeightName[] = [
 
 export type FontWeightScale = Readonly<Record<FontWeightName, number>>
 
+// ── Font Families ──
+
+export type FontFamilyName = 'sans' | 'serif' | 'mono'
+
+export const FONT_FAMILY_NAMES: readonly FontFamilyName[] = ['sans', 'serif', 'mono'] as const
+
+/** Complete CSS font-family stacks. */
+export type FontFamilyScale = Readonly<Record<FontFamilyName, string>>
+
 // ── Letter Spacing (tracking) ──
 
 export type TrackingStep = 'tighter' | 'tight' | 'normal' | 'wide' | 'wider' | 'widest'
@@ -181,8 +190,10 @@ export interface NonColorTokens {
   readonly spacing: SpacingConfig
   readonly radius: RadiusConfig
   readonly typography: TypographyConfig
+  readonly fontFamily?: FontFamilyScale
   readonly fontWeight: FontWeightScale
   readonly tracking: TrackingScale
+  readonly trackingOffsetEm?: number
   readonly leading: LeadingScale
   readonly shadow: ShadowScale
   readonly easing: EasingScale
@@ -234,6 +245,12 @@ export const defaultFontWeight: FontWeightScale = {
   bold: 700,
   extrabold: 800,
   black: 900,
+}
+
+export const defaultFontFamily: FontFamilyScale = {
+  sans: 'ui-sans-serif, system-ui, sans-serif',
+  serif: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif',
+  mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
 }
 
 export const defaultTracking: TrackingScale = {
@@ -301,8 +318,10 @@ export const defaultNonColorTokens: NonColorTokens = {
   spacing: defaultSpacing,
   radius: defaultRadius,
   typography: defaultTypography,
+  fontFamily: defaultFontFamily,
   fontWeight: defaultFontWeight,
   tracking: defaultTracking,
+  trackingOffsetEm: 0,
   leading: defaultLeading,
   shadow: defaultShadow,
   easing: defaultEasing,

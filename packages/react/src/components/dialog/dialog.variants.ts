@@ -3,7 +3,7 @@ import { overlaySurfaceBase } from '../../styles/overlay-classes'
 
 export const dialogOverlayVariants = tv({
   base: [
-    'fixed inset-0 z-50 bg-black/50',
+    'fixed inset-0 z-50 bg-black/45 backdrop-blur-sm',
     'data-[state=open]:animate-[zui-dialog-overlay-in_200ms_ease-out_forwards]',
   ],
 })
@@ -14,7 +14,7 @@ export const dialogContentVariants = tv({
     'rounded-dialog-content p-dialog-content shadow-dialog-content',
     ...overlaySurfaceBase,
     'data-[state=open]:animate-[zui-dialog-content-in_200ms_ease-out_forwards]',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40',
   ],
 })
 

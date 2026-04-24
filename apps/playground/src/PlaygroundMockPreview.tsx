@@ -102,7 +102,7 @@ function DashboardView() {
               <CardDescription>Subscriptions</CardDescription>
               <CardTitle className="text-2xl tabular-nums">+2,350</CardTitle>
             </div>
-            <Badge color="info">+180</Badge>
+            <Badge color="secondary">+180</Badge>
           </CardHeader>
           <CardContent className="pt-0">
             <Typography variant="caption" tone="muted">
@@ -182,7 +182,9 @@ function CardsView() {
             <Button variant="outline" color="neutral" size="sm">
               Not now
             </Button>
-            <Button size="sm">Continue to checkout</Button>
+            <Button color="secondary" size="sm">
+              Continue to checkout
+            </Button>
           </div>
         </CardContent>
       </Card>

@@ -31,7 +31,7 @@ export function DatePicker({
           color="neutral"
           disabled={disabled}
           className={cn(
-            'min-w-[11rem] justify-start text-left font-normal',
+            'min-h-input-field min-w-[11rem] w-full justify-start text-left font-normal shadow-xs',
             !date && 'text-muted-foreground',
             className,
           )}

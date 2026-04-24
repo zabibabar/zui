@@ -2,7 +2,7 @@ import { tv } from 'tailwind-variants'
 
 export const drawerOverlayVariants = tv({
   base: [
-    'fixed inset-0 z-50 bg-black/50',
+    'fixed inset-0 z-50 bg-black/45 backdrop-blur-sm',
     'data-[state=open]:animate-[zui-dialog-overlay-in_200ms_ease-out_forwards]',
   ],
 })
@@ -11,7 +11,7 @@ export const drawerContentVariants = tv({
   base: [
     'fixed top-0 z-50 flex h-full w-full max-w-drawer-content flex-col gap-drawer-content-gap border-border bg-popover p-drawer-content shadow-drawer-content',
     'text-popover-foreground',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40',
   ],
   variants: {
     side: {

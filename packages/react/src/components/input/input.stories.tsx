@@ -15,3 +15,11 @@ export const Default: Story = {}
 export const Disabled: Story = {
   args: { disabled: true },
 }
+
+export const Invalid: Story = {
+  args: {
+    'aria-invalid': true,
+    defaultValue: 'bad@',
+    placeholder: 'you@example.com',
+  },
+}

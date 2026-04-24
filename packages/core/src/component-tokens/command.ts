@@ -52,6 +52,6 @@ export const defaultCommandTokens: CommandTokens = {
     headingFontSize: 'xs',
     headingFontWeight: 'medium',
   },
-  item: { paddingX: 2, paddingY: 1.5, fontSize: 'sm', radius: 'sm' },
+  item: { paddingX: 3, paddingY: 1.5, fontSize: 'sm', radius: 'sm' },
   shortcut: { fontSize: 'xs', tracking: 'widest' },
 }

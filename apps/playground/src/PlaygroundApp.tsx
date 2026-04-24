@@ -50,6 +50,7 @@ export function PlaygroundApp() {
 
   const handleSelectPreset = (id: string) => {
     if (id === 'custom') return
+
     setSelectedPresetId(id)
     setThemeState(getPlaygroundPresetState(id))
   }
@@ -57,6 +58,7 @@ export function PlaygroundApp() {
   const handleThemeChange = (next: PlaygroundThemeState) => {
     setThemeState(next)
     if (selectedPresetId === 'custom') return
+
     const presetState = getPlaygroundPresetState(selectedPresetId)
     if (!themeStatesEqual(next, presetState)) setSelectedPresetId('custom')
   }
@@ -69,6 +71,7 @@ export function PlaygroundApp() {
 
   const handleExport = () => {
     if (isExporting) return
+
     setIsExporting(true)
     try {
       exportThemeBundle({
@@ -86,7 +89,7 @@ export function PlaygroundApp() {
   return (
     <>
       <Toaster richColors position="top-center" />
-      <div className="flex h-screen min-h-0 flex-col bg-background text-foreground">
+      <div className="flex h-screen min-h-0 flex-col bg-background font-sans text-foreground">
         <div className="flex min-h-0 flex-1">
           <aside className="flex w-[min(100%,380px)] shrink-0 flex-col">
             <PlaygroundThemeSidebar
