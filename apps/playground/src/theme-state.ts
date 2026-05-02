@@ -57,6 +57,7 @@ export function defaultPlaygroundThemeState(): PlaygroundThemeState {
   return {
     seeds: {
       primary: presets.blue,
+      secondary: presets.violet,
       neutral: presets.slate,
       danger: presets.red,
       info: presets.cyan,

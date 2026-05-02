@@ -1,4 +1,6 @@
 import type {
+  ChartColors,
+  ChartConfig,
   ChromeConfig,
   ChromeTokens,
   ColorSeed,
@@ -15,7 +17,7 @@ import type {
   ThemeMode,
 } from '../types/theme'
 import { presets } from '../primitives/presets'
-import { SHADE_KEYS } from '../types/theme'
+import { CHART_COLOR_KEYS, SHADE_KEYS } from '../types/theme'
 import { assignForegrounds } from '../utils/contrast'
 import { generatePalette } from '../utils/palette'
 import colorMappingJson from './color-mapping.json'
@@ -225,14 +227,17 @@ function deriveSurfaceRaised(base: OklchColor, mode: ThemeMode): OklchColor {
   }
 }
 
-/** Default seeds when danger / info / success / warning palettes are omitted. */
-const DEFAULT_OPTIONAL_INTENT_SEEDS: Record<'danger' | 'info' | 'success' | 'warning', ColorSeed> =
-  {
-    danger: presets.red,
-    info: presets.cyan,
-    success: presets.green,
-    warning: presets.amber,
-  }
+/** Default seeds when optional intent palettes are omitted. */
+const DEFAULT_OPTIONAL_INTENT_SEEDS: Record<
+  'secondary' | 'danger' | 'info' | 'success' | 'warning',
+  ColorSeed
+> = {
+  secondary: presets.violet,
+  danger: presets.red,
+  info: presets.cyan,
+  success: presets.green,
+  warning: presets.amber,
+}
 
 /**
  * Fill missing optional intent palettes using curated presets and the resolved ink pair.
@@ -256,10 +261,46 @@ function mergeOptionalIntentPalettes(
   return merged
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Chart colors
+// ─────────────────────────────────────────────────────────────────────────────
+
+const DEFAULT_CHART_COLORS: Record<ThemeMode, ChartColors> = {
+  light: {
+    '1': { l: 0.55, c: 0.15, h: 230 },
+    '2': { l: 0.55, c: 0.12, h: 175 },
+    '3': { l: 0.55, c: 0.14, h: 55 },
+    '4': { l: 0.55, c: 0.16, h: 340 },
+    '5': { l: 0.55, c: 0.15, h: 285 },
+  },
+  dark: {
+    '1': { l: 0.7, c: 0.15, h: 230 },
+    '2': { l: 0.7, c: 0.12, h: 175 },
+    '3': { l: 0.7, c: 0.14, h: 55 },
+    '4': { l: 0.7, c: 0.16, h: 340 },
+    '5': { l: 0.7, c: 0.15, h: 285 },
+  },
+}
+
+/**
+ * Resolve chart series colors from optional consumer overrides, falling back
+ * to curated defaults per theme mode.
+ */
+export function resolveChart(mode: ThemeMode, config?: ChartConfig): ChartColors {
+  const defaults = DEFAULT_CHART_COLORS[mode]
+  if (!config) return defaults
+  const merged = { ...defaults }
+  for (const key of CHART_COLOR_KEYS) {
+    if (config[key]) merged[key] = config[key]
+  }
+  return merged
+}
+
 export interface GenerateThemeOptions {
   readonly surfaces?: SurfaceConfig
   readonly ink?: InkConfig
   readonly chrome?: ChromeConfig
+  readonly chart?: ChartConfig
 }
 
 /**
@@ -296,6 +337,7 @@ export function generateTheme(
     foreground: deriveMutedForeground(ink, surfaces, mode),
   }
   const chrome = resolveChrome(surfaces, mode, mergedPalettes.primary, options?.chrome)
+  const chart = resolveChart(mode, options?.chart)
 
   return {
     mode,
@@ -305,5 +347,6 @@ export function generateTheme(
     muted,
     surfaces,
     ink,
+    chart,
   }
 }

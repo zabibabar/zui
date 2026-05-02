@@ -192,6 +192,7 @@ export interface NonColorTokens {
   readonly typography: TypographyConfig
   readonly fontFamily?: FontFamilyScale
   readonly fontWeight: FontWeightScale
+  readonly fontFamily: FontFamilyScale
   readonly tracking: TrackingScale
   readonly trackingOffsetEm?: number
   readonly leading: LeadingScale
@@ -320,6 +321,7 @@ export const defaultNonColorTokens: NonColorTokens = {
   typography: defaultTypography,
   fontFamily: defaultFontFamily,
   fontWeight: defaultFontWeight,
+  fontFamily: defaultFontFamily,
   tracking: defaultTracking,
   trackingOffsetEm: 0,
   leading: defaultLeading,

@@ -75,6 +75,13 @@ export interface MutedTokens {
   readonly foreground: OklchColor
 }
 
+export type ChartColorKey = '1' | '2' | '3' | '4' | '5'
+
+export const CHART_COLOR_KEYS: readonly ChartColorKey[] = ['1', '2', '3', '4', '5'] as const
+
+/** Five theme-aware colors for data-visualisation series. */
+export type ChartColors = Readonly<Record<ChartColorKey, OklchColor>>
+
 export interface GeneratedTheme {
   readonly mode: ThemeMode
   readonly primitives: Record<string, Palette>
@@ -83,6 +90,7 @@ export interface GeneratedTheme {
   readonly muted: MutedTokens
   readonly surfaces: SurfaceTokens
   readonly ink: InkColors
+  readonly chart: ChartColors
 }
 
 export interface SurfaceConfig {
@@ -102,6 +110,9 @@ export interface ChromeConfig {
   readonly ring?: OklchColor
 }
 
+/** Optional consumer overrides for chart series colors. */
+export type ChartConfig = Partial<ChartColors>
+
 export interface ThemeConfig {
   readonly name: string
   readonly mode: ThemeMode
@@ -109,5 +120,6 @@ export interface ThemeConfig {
   readonly ink?: InkConfig
   readonly surfaces?: SurfaceConfig
   readonly chrome?: ChromeConfig
+  readonly chart?: ChartConfig
   readonly lightnessCurve?: Partial<LightnessCurve>
 }

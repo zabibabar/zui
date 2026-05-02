@@ -1,10 +1,17 @@
-import type { FontWeightName, TrackingStep, TypeScaleStep } from '../primitives/non-color'
+import type {
+  FontFamilyName,
+  FontWeightName,
+  TrackingStep,
+  TypeScaleStep,
+} from '../primitives/non-color'
 import type { TypographyVariant } from './types'
 
 export interface TypographyVariantTokens {
   readonly fontSize: TypeScaleStep
   readonly fontWeight: FontWeightName
   readonly tracking?: TrackingStep
+  /** Font family stack reference. Omit to inherit from the document (typically sans). */
+  readonly fontFamily?: FontFamilyName
   /** Larger font size applied above the `sm` breakpoint. */
   readonly responsiveFontSize?: TypeScaleStep
   readonly textTransform?: 'uppercase'

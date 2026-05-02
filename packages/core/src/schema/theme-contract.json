@@ -22,6 +22,7 @@
         "primary": { "$ref": "#/$defs/colorSeed" },
         "secondary": { "$ref": "#/$defs/colorSeed" },
         "neutral": { "$ref": "#/$defs/colorSeed" },
+        "secondary": { "$ref": "#/$defs/colorSeed" },
         "danger": { "$ref": "#/$defs/colorSeed" },
         "info": { "$ref": "#/$defs/colorSeed" },
         "success": { "$ref": "#/$defs/colorSeed" },
@@ -79,6 +80,18 @@
           "$ref": "#/$defs/oklchColor",
           "description": "Focus ring color. Default: primary palette 300 stop (lighter brand tint)."
         }
+      },
+      "additionalProperties": false
+    },
+    "chart": {
+      "type": "object",
+      "description": "Optional chart series colors. Five OklchColor slots for data-visualisation palettes. Omitted slots use curated defaults tuned per theme mode.",
+      "properties": {
+        "1": { "$ref": "#/$defs/oklchColor", "description": "Chart series 1." },
+        "2": { "$ref": "#/$defs/oklchColor", "description": "Chart series 2." },
+        "3": { "$ref": "#/$defs/oklchColor", "description": "Chart series 3." },
+        "4": { "$ref": "#/$defs/oklchColor", "description": "Chart series 4." },
+        "5": { "$ref": "#/$defs/oklchColor", "description": "Chart series 5." }
       },
       "additionalProperties": false
     },

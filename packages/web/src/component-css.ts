@@ -60,6 +60,7 @@ const SCALE_REF: Readonly<Record<string, readonly [ns: string, pfx: string]>> = 
   radius: ['radius', 'radius'],
   shadow: ['shadow', 'shadow'],
   fontWeight: ['font-weight', 'font-weight'],
+  fontFamily: ['font-family', 'font'],
   tracking: ['tracking', 'tracking'],
 }
 

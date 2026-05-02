@@ -1,5 +1,5 @@
 import type { GeneratedTheme, OklchColor } from '@zui/core'
-import { SHADE_KEYS } from '@zui/core'
+import { CHART_COLOR_KEYS, SHADE_KEYS } from '@zui/core'
 import { oklchToCss } from './format'
 
 function cssVar(name: string, value: string): string {
@@ -89,6 +89,10 @@ function renderChrome(theme: GeneratedTheme): string[] {
   ]
 }
 
+function renderChart(theme: GeneratedTheme): string[] {
+  return CHART_COLOR_KEYS.map((key) => cssVar(`chart-${key}`, formatColor(theme.chart[key])))
+}
+
 export interface CssTransformOptions {
   /**
    * CSS selector to scope the variables under.
@@ -129,6 +133,8 @@ export function themeToCss(theme: GeneratedTheme, options?: CssTransformOptions)
   lines.push(...renderMuted(theme))
   lines.push('')
   lines.push(...renderChrome(theme))
+  lines.push('')
+  lines.push(...renderChart(theme))
 
   const body = lines.map((line) => (line === '' ? '' : `  ${line}`)).join('\n')
 

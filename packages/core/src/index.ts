@@ -148,13 +148,17 @@ export {
   deriveMutedForeground,
   generateTheme,
   mapSemanticColors,
+  resolveChart,
   resolveChrome,
   resolveInk,
   resolveSurfaces,
 } from './semantic/theme'
 export type { GenerateThemeOptions } from './semantic/theme'
-export { SHADE_KEYS } from './types/theme'
+export { CHART_COLOR_KEYS, SHADE_KEYS } from './types/theme'
 export type {
+  ChartColorKey,
+  ChartColors,
+  ChartConfig,
   ChromeConfig,
   ChromeTokens,
   ColorSeed,
